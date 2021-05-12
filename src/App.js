@@ -1,19 +1,23 @@
-import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton'
+import { MDBRow, MDBCol, MDBIcon, MDBBtn } from "mdbreact";
+
 import './App.css';
 
 import Navigation from './Nav.js';
-
+import { Footer } from './Nav.js';
+import Home from './Home.js';
 
 
 
 function App() {
+
   return (
-    <Navigation> 
-      <a href="#">Home</a><br/>
-      <a href="#">Portfolio</a>
-    </Navigation>
+    <div class="background">
+    <Navigation />
+    <Home /> 
+    <Footer />
+    </div>
   );
 }
 

@@ -19,7 +19,54 @@
   }
 }
 
-.navButton {
-  background-color: transparent;
-  border: none;
+.background {
+  background-image: url('./images/travel_background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  margin-top: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculatorBox {
+  text-align: center;
+  margin: 0 auto;
+  width: 50%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0,0,0)
+}
+
+.searchRow {
+  justify-content: center;
+}
+
+.buttonSearch {
+  width: 33.33333333%;
+  background-color: rgba(137, 207, 235, 0.5);
+  border: 0px;
+}
+
+.form {
+  height: 100px;
+}
+
+#socialMediaFooter {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+#socialMediaFooter  a {
+  color: white;
+}
+
+.navbar {
+  width: 80px;
 }
