@@ -6,54 +6,32 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownType from 'react-bootstrap/Dropdown';
 
+function Title(props) {
+
+  return (
+    <h1 id="pageTitle">Travel Money</h1>
+  )
+}
+
 
 class DropdownCurrency extends React.Component {
     constructor() {
       super();
-      
-      this.state = {
-        showMenu: false,
-      };
-      
-      this.showMenu = this.showMenu.bind(this);
-      this.closeMenu = this.closeMenu.bind(this);
-    }
-    
-    showMenu(event) {
-        event.preventDefault();
-      
-        this.setState({ showMenu: true, });
-        document.getElementById('root').addEventListener('click', this.closeMenu);
-    }
-
-    closeMenu() {
-        this.setState({
-            showMenu: false,
-        })
-        document.getElementById('root').removeEventListener('click', this.closeMenu);
     }
   
     render() {
       return (
-        <div className="buttonHolster">
-          <button className="btn-sm" onClick={this.showMenu}>
-            USD
-          </button>
+        <DropdownButton 
+          id="currencyButton" 
+          variant="Secondary"
+          size="sm"
+          title="USD"
           
-          {
-            this.state.showMenu
-              ? (
-                <div className="menu">
-                  <button className="menuItem w-100"> USD</button>
-                  <button className="menuItem w-100"> AUD </button>
-                  <button className="menuItem w-100"> EUR </button>
-                </div>
-              )
-              : (
-                null
-              )
-          }
-        </div>
+        >
+          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        </DropdownButton>
       );
     }
   }
@@ -64,23 +42,28 @@ class CurrencyForm extends React.Component {
 
     render() {
         return (
-            <form class="d-flex">
-                <DropdownCurrency className="mr-2" />
+            <form className="row formRow px-2">
+              <div className="col-5 conversion">
+              <DropdownCurrency className="mr-2" />
                 <input
                     placeholder="{ConvertFrom}"
                     className="convertFrom"
                     type="number"
                 >  
                 </input>
-                <MDBIcon className="mx-2 mt-2" icon="angle-right" />
-                <input
+              </div>
+              <div className="col-1 arrow">
+                <MDBIcon className="" icon="angle-right" size="3x" />
+              </div>
+              <div className="col-5 conversion">
+              <input
                     placeholder="{ConvertTo}"
                     className="convertTo"
                     type="number"
                 >
                 </input>
                 <DropdownCurrency className="ml-2" />
-
+              </div>
             </form>
         )
     }
@@ -93,26 +76,25 @@ class Home extends React.Component {
     render() {
  
     return (
-      <div className="container">
-        <div className="box">
-            <div className="innerBox">
-            <div className="row currencyRow">
-                <button>
-                    <Link to="/">Currency Converter</Link>
-                </button>
-                <button>
-                    <Link to="/chart">Currency Chart</Link>
-                </button>
-                <button>
-                    <Link to="/chart/bangforbuck">Bang for Your Buck</Link>
-                </button>
-            </div>
-            <div className="row formRow">
-                <CurrencyForm />
-            </div>
-            </div>
-        </div>
+      <>
+      <Title />
+      <div className="currencyCoverter box">
+          <div className="innerBox">
+          <div className="row currencyRow">
+              <button className="topLeftButton">
+                  <Link to="/">Currency Converter</Link>
+              </button>
+              <button className="middleButton">
+                  <Link to="/chart">Currency Chart</Link>
+              </button>
+              <button className="topRightButton">
+                  <Link to="/chart/bangforbuck">Bang for Your Buck</Link>
+              </button>
+          </div>
+          <CurrencyForm />
+          </div>
       </div>
+      </>
     )
   }
 }

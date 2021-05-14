@@ -27,15 +27,17 @@ function App() {
     <Router>
     <Background>
       <Navi>
-        <Link to="/">Home</Link>
-        <Link to="/portfolio">Portfolio</Link>
+        <Link className="navLink" to="/">Home</Link>
+        <Link className="navLink" to="/portfolio">Portfolio</Link>
       </Navi>
-        <Switch>
-          <Route path="/portfolio" component={Portfolio} />
-          <Route path="/" component={Home} />
-        </Switch>
-        <Route path="/chart"  component={Chart} />
-        <Route path="/chart/bangforbuck"  component={BangforBuck} />
+        <div className="container">
+          <Switch>
+            <Route path="/portfolio" component={Portfolio} />
+            <Route path="/" component={Home} />
+          </Switch>
+          <Route path="/chart"  component={Chart} />
+          <Route path="/chart/bangforbuck"  component={BangforBuck} />
+        </div>
       <Footer />
     </Background>
     </Router>

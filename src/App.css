@@ -19,11 +19,20 @@
   }
 }
 
+
+
+/* --------------- GENERICS ------------ */
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+button:focus {
+  outline: 0;
+}
+
 
 
 /* -------------- BACKGROUND ---------- */
@@ -37,76 +46,303 @@ input::-webkit-inner-spin-button {
 
 }
 
-/* ------------ HOME.js ------------------- */
 
+.container {
+  padding-bottom: 50px;
+}
+
+
+
+/* ----------- NAV.JS ----------------------- */
+.navbar {
+  width: 85px;
+}
+
+.navLink {
+  color: white;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.navLink:hover {
+  color: white;
+}
+
+
+
+/* ------------ PORTFOLIO.JS --------------- */
+
+.portfolio {
+  margin-top: 50px;
+}
+
+.bioPicture img {
+  box-shadow: 2px 2px 5px black;
+}
+
+.bio {
+  display: flex;
+  align-items: start;
+}
+
+.bio p {
+  font-weight: 400;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 2px 2px 5px black;
+  border-radius: 50px 50px 50px 0;
+}
+
+@media (max-width: 768px) {
+  .portfolio {
+    margin-top: 100px;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(250, 250, 250, 0.5);
+    box-shadow: 2px 2px 5px black;
+    border-radius: 15px;
+  }
+
+  .bioPicture {
+    margin-top: 25px;
+  }
+
+  .bio {
+    margin-top: 10px;
+  }
+  .bio p {
+    box-shadow: none;
+    background-color: transparent;
+  }
+
+}
+
+@media (max-width: 575px) {
+  .portfolio {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+
+
+/* ------------- TITLE --------------------- */
+
+#pageTitle {
+  margin-top: 150px;
+  margin-bottom: -20px;
+  padding-left: 200px;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px grey;
+  font-size: 150px;
+}
+@media(max-width: 1199px) {
+  #pageTitle {
+    font-size: 140px;
+    padding-left: 105px;
+  }
+}
+@media(max-width: 991px) {
+  #pageTitle {
+    font-size: 105px;
+    margin-bottom: -15px;
+    padding-left: 75px;
+  }
+}
+@media(max-width: 767px) {
+  #pageTitle {
+    font-size: 75px;
+    margin-bottom: -5px;
+    padding-left: 70px;
+  }
+}
+
+
+
+/* ------------ HOME.js ------------------- */
 
 .box {
   margin: auto;
-  margin-top: 400px;
+  margin-top: 1px;
   background-color: white;
   box-shadow: 2px 2px 5px black;
   border-radius: 15px;
-  width: 50%;
+  width: 80%;
+  background-color: rgba(250, 250, 250, 0.5);
 }
 
 .innerBox {
-  padding: 10px;
-}
-
-.currencyRow,
-.formRow {
-  justify-content: center;
-  padding: 10px;
-}
-
-.currencyRow button {
-  width: 33%;
-  border: none;
-  background-color: transparent;
-}
-
-.convertTo,
-.convertFrom {
-  width: 50px;
-}
-
-.buttonHolster {
-  position: relative;
-}
-
-.btn-sm {
+  padding: 0 10px 10px 10px;
   margin-left: 5px;
   margin-right: 5px;
 }
 
-.menu {
-  position: absolute;
-  top: 32px;
+.currencyRow {
+  justify-content: space-between;
+}
+.formRow {
+  justify-content: space-between;
+  padding: 10px;
+  margin: 20px 5px 20px 5px;
+}
+
+.currencyRow button {
+  width: 33.33333333%;
+  border: none !important;
+  margin-top: 0;
   background-color: skyblue;
-
-  
+  min-height: 40px;
 }
 
-.menuItem {
-  background-color: transparent;
-  outline: none;
-  border: 0;
+.topLeftButton {
+  border-radius: 15px 0 15px 0;
+  border-right: 1px solid white !important;
 }
+.middleButton {
+  border-radius: 0 0 15px 15px;
+}
+.topRightButton {
+  border-radius: 0 15px 0 15px;
+  border-left: 1px solid white !important;
+}
+
+.currencyRow a {
+  color: white;
+  line-height: 15px;
+  font-size: 15px;
+}
+.currencyRow a:hover {
+  color: red;
+  font-weight: bold;
+}
+
+.convertTo,
+.convertFrom {
+  width: 60%;
+}
+
+.conversion {
+  display: flex;
+  justify-content: space-between;
+}
+
+#currencyButton {
+  padding: 5px !important;
+  background-color: white;
+}
+
+.dropdown-toggle::after {
+  margin-top: 5px !important;
+}
+
 
 
 /* ------------ CURRENCY CHART ------------ */
 
-.sky {
-  margin-top: 500px;
-  margin-bottom: 0;
+.currencyChart {
+  margin-top: 350px;
 }
+
+.chartTitle {
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px grey;
+  font-size: 70px !important;
+  font-weight:400;
+  position: absolute;
+  top: -90px;
+  left: 0;
+
+}
+.currencyChartChoice {
+  color: red;
+}
+@media(max-width: 991px) {
+  .currencyChart {
+    margin-top: 200px;
+  }
+  .chartTitle{
+    font-size: 60px !important;
+    top: -65px;
+    left: 0;
+  }
+}
+@media(max-width: 767px) {
+  .chartTitle{
+    font-size: 45px !important;
+    top: -60px;
+    left: 0;
+  }
+}
+
+.table {
+  position: relative;
+  width: 70%;
+  padding: 20px;
+  margin: auto;
+  background-color: rgba(250, 250, 250, 0.5);
+  box-shadow: 2px 2px 5px black;
+  border-radius: 15px;
+}
+
+.headRow {
+  border-bottom: 2px solid black;
+  padding-bottom: 5px;
+  flex-wrap: nowrap;
+}
+
+
+.tableRow {
+  justify-content:space-evenly;
+  padding-bottom: 5px;
+}
+
 
 
 /* ------------- BANG FOR YOUR BUCK ---------- */
 
-.sea {
-  margin-top: 500px;
-  margin-bottom: 0;
+.destinationTitle {
+  margin-top: 200px;
+  padding-left: 165px;
+  color: white;
+  text-shadow: 2px 2px grey;
+  font-size: 70px !important;
+  font-weight:400;
+}
+@media(max-width: 991px) {
+  .destinationTitle {
+   margin-top: 100px;
+   font-size: 45px !important;
+   padding-left: 20px;
+  }
+}
+
+.bangBuck {
+  margin-top: 50px;
+}
+
+.v1 {
+  border-right: 6px solid skyblue;
+  height: 500px;
+}
+
+.info {
+  flex-direction: column;
+}
+
+.destination {
+  display: flex;
+  padding-left: 50px;
+  text-align: left;
+  max-width: 100%;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.arrow {
+  color: red;
 }
 
 
