@@ -8,8 +8,6 @@ import './App.css';
 import {Footer, Navi} from "./Nav.js"
 import Home from "./Home.js"
 import Portfolio from './Portfolio.js'
-import Chart from './CurrencyChart.js'
-import BangforBuck from './BangforBuck.js'
 
 function Background(props) {
 
@@ -25,16 +23,12 @@ function App() {
   return (
     <>
     <Router>
-    <Background>
-      <Navi/>
-        <div className="container">
+      <Background>
+        <Navi/>
           <Switch>
             <Route path="/portfolio" component={Portfolio} />
             <Route path="/" component={Home} />
           </Switch>
-          <Route path="/chart"  component={Chart} />
-          <Route path="/chart/bangforbuck"  component={BangforBuck} />
-        </div>
       <Footer />
     </Background>
     </Router>

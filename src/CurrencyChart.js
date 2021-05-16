@@ -19,12 +19,16 @@ class DataRow extends React.Component {
 
 
 class Chart extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
     render() {
+      console.log(this.props.rates);
       return (
         <div className="currencyChart">
           <div className="table">
-            <h1 className="chartTitle">Convert <span className="currencyChartChoice">USD</span> to ...</h1>
+            <h1 className="chartTitle">Convert <span className="currencyChartChoice">{this.props.base}</span> to ...</h1>
             <div className="row tableRow headRow">
               <div className="data">Forgein Currency</div>
               <div className="data">Exchange Rate</div>

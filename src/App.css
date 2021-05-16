@@ -218,7 +218,7 @@ button:focus {
 }
 
 .convertTo,
-.convertFrom {
+.base {
   width: 60%;
 }
 
