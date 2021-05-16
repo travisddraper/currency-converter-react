@@ -26,10 +26,7 @@ function App() {
     <>
     <Router>
     <Background>
-      <Navi>
-        <Link className="navLink" to="/">Home</Link>
-        <Link className="navLink" to="/portfolio">Portfolio</Link>
-      </Navi>
+      <Navi/>
         <div className="container">
           <Switch>
             <Route path="/portfolio" component={Portfolio} />

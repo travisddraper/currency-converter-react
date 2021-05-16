@@ -232,6 +232,12 @@ button:focus {
   background-color: white;
 }
 
+.dropdown-menu {
+  height: 200px;
+  left: -50px !important;
+  overflow: scroll;
+}
+
 .dropdown-toggle::after {
   margin-top: 5px !important;
 }
