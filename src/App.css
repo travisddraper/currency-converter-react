@@ -217,8 +217,8 @@ button:focus {
   font-weight: bold;
 }
 
-.convertTo,
-.base {
+#convertTo,
+#base {
   width: 60%;
 }
 

@@ -35,24 +35,43 @@ const DropdownCurrency = (props) => {
 }
 
 const ConversionSection = (props) => {
-  const {title, rateNames, onChange, direction, conversion} = props
+  const {title, rateNames, onChange, direction, conversion, goingRate} = props
+
+  //function conversionCalculator(direction, goingRate)
 
   return (
     <div className="col-5 conversion">
-    <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
-      <input
-          placeholder={`00.00 ${conversion}`}
-          className={direction}
-          type="number"
-      >  
-      </input>
+      {direction === 'base' 
+        ? (
+          <>  
+            <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
+            <input
+              placeholder={`00.00 ${conversion}`}
+              id={direction}
+              type="number"
+            >  
+            </input>
+          </>
+          )
+        : (
+          <>
+            <input
+              placeholder={`00.00 ${conversion}`}
+              id={direction}
+              type="number"
+            >  
+            </input>
+            <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
+          </>
+          )
+      }
     </div>
   )
 }
 
 const CurrencyForm = (props) => {
   const { base, convertTo } = props.selections
-  const { rates, handleCurrencyChange } = props
+  const { rates, handleCurrencyChange, goingRate } = props
 
   const rateNames = rates.map((currency) => {
     for(const key in currency) { return key; }
@@ -60,17 +79,17 @@ const CurrencyForm = (props) => {
 
   return (
     <form className="row formRow px-2">
-      <ConversionSection title={base} rateNames={rateNames} onChange={handleCurrencyChange} direction="base" conversion={base} />
+      <ConversionSection title={base} rateNames={rateNames} goingRate={goingRate} onChange={handleCurrencyChange} direction="base" conversion={base} />
       <div className="col-1 arrow">
         <MDBIcon className="" icon="angle-right" size="3x" />
       </div>
-      <ConversionSection title={convertTo} rateNames={rateNames} onChange={handleCurrencyChange} direction="convertTo" conversion={convertTo} />
+      <ConversionSection title={convertTo} rateNames={rateNames} goingRate={goingRate} onChange={handleCurrencyChange} direction="convertTo" conversion={convertTo} />
     </form>
   )
 }
 
 const ConverterBox = (props) => {
-  const { selections, rates, handleCurrencyChange } = props;
+  const { selections, rates, handleCurrencyChange, goingRate } = props;
 
   return (
     <div className="currencyCoverter box">
@@ -86,7 +105,7 @@ const ConverterBox = (props) => {
             <Link to="/chart/bangforbuck">Bang for Your Buck</Link>
           </button>
         </div>
-        <CurrencyForm selections={selections} rates={rates} handleCurrencyChange={handleCurrencyChange} />
+        <CurrencyForm selections={selections} goingRate={goingRate} rates={rates} handleCurrencyChange={handleCurrencyChange} />
       </div>
     </div>
   )
@@ -103,7 +122,8 @@ class Home extends React.Component {
       selections: {
         base: 'EUR',
         convertTo: 'USD',
-      }
+      },
+      goingRate: 0,
     }
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
   }
@@ -118,20 +138,31 @@ class Home extends React.Component {
     this.setState({ selections: newSelections })
   }
 
+  currencyUpdate(data) {
+    let goingRate = 0;
+    let newRates = [];
+    const newSelections = {...this.state.selections, base: data.base }
 
+    for (const property in data.rates) {
+      if(this.state.selections.convertTo === property) {
+        goingRate = data.rates[property]
+      }
+      newRates.push( {[property]: data.rates[property]} )
+    }
+
+    this.setState({ 
+      goingRate: goingRate,
+      rates: newRates,
+      selections: newSelections,
+    })
+  }
 
   componentDidMount () {
     fetch("https://altexchangerateapi.herokuapp.com/latest")
     .then(checkStatus)
     .then(json)
     .then((data) => {
-      for (const property in data.rates) {
-        this.setState({rates: this.state.rates.concat({[property]: data.rates[property]}) })
-      }
-
-      const newSelections = {...this.state.selections, base: data.base }
-
-      this.setState({ selections: newSelections })
+      this.currencyUpdate(data);
     })
     .catch((error) => {
       this.setState({ error: error.message });
@@ -140,37 +171,23 @@ class Home extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.selections.base !== this.state.selections.base) {
+    if (prevState.selections.base !== this.state.selections.base || prevState.selections.convertTo !== this.state.selections.convertTo) {
       fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.state.selections.base}`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        const newSelections = {...this.state.selections, base: data.base }
-        let newRates = [];
-
-        for (const property in data.rates) {
-          newRates.push({[property]: data.rates[property]})
-        }
-        this.setState({ 
-          selections: newSelections,
-          rates: newRates,
-         })
-         console.log(this.state);
-      })
-      .catch((error) => {
-        this.setState({ error: error.message });
-        console.log(error);
+        this.currencyUpdate(data);
       })
     }
   }
 
   render() {
-    const { selections, rates } = this.state
+    const { selections, rates, goingRate } = this.state
     return (
       <>
       <Title />
       <div className="container">
-        <ConverterBox selections={selections} rates={rates} handleCurrencyChange={this.handleCurrencyChange} />
+        <ConverterBox selections={selections} goingRate={goingRate} rates={rates} handleCurrencyChange={this.handleCurrencyChange} />
         <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} />} />
         <Route path="/chart/bangforbuck" render={()=> <BangforBuck />} />
       </div>
