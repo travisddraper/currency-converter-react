@@ -37,7 +37,17 @@ const DropdownCurrency = (props) => {
 const ConversionSection = (props) => {
   const {title, rateNames, onChange, direction, conversion, goingRate} = props
 
-  //function conversionCalculator(direction, goingRate)
+  function conversionCalculator(direction, goingRate) {
+    let value = document.getElementById(direction).value;
+
+    if(direction === 'base') {
+      document.getElementById('convertTo').value = (value * goingRate).toFixed(2);
+      return
+    }
+
+    document.getElementById('base').value = (value / goingRate).toFixed(2);
+    return
+  }
 
   return (
     <div className="col-5 conversion">
@@ -49,6 +59,7 @@ const ConversionSection = (props) => {
               placeholder={`00.00 ${conversion}`}
               id={direction}
               type="number"
+              onChange={()=>{conversionCalculator(direction, goingRate)}}
             >  
             </input>
           </>
@@ -59,6 +70,7 @@ const ConversionSection = (props) => {
               placeholder={`00.00 ${conversion}`}
               id={direction}
               type="number"
+              onChange={()=>{conversionCalculator(direction, goingRate)}}
             >  
             </input>
             <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
@@ -142,6 +154,8 @@ class Home extends React.Component {
     let goingRate = 0;
     let newRates = [];
     const newSelections = {...this.state.selections, base: data.base }
+    let base = document.getElementById('base')
+    let conversion = document.getElementById('convertTo')
 
     for (const property in data.rates) {
       if(this.state.selections.convertTo === property) {
@@ -155,6 +169,14 @@ class Home extends React.Component {
       rates: newRates,
       selections: newSelections,
     })
+
+    if(conversion.value) {
+      console.log('goingRate', goingRate, '|', 'conversionValue', conversion.value)
+      conversion.value = (base.value * goingRate).toFixed(2)
+    }
+    if(newSelections.base === newSelections.convertTo) {
+      conversion.value = base.value
+    }
   }
 
   componentDidMount () {
@@ -183,6 +205,7 @@ class Home extends React.Component {
 
   render() {
     const { selections, rates, goingRate } = this.state
+    console.log(rates);
     return (
       <>
       <Title />
