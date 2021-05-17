@@ -24,7 +24,7 @@ class Chart extends React.Component {
   }
 
     render() {
-      console.log(this.props.rates);
+
       return (
         <div className="currencyChart">
           <div className="table">

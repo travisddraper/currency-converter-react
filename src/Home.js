@@ -171,7 +171,6 @@ class Home extends React.Component {
     })
 
     if(conversion.value) {
-      console.log('goingRate', goingRate, '|', 'conversionValue', conversion.value)
       conversion.value = (base.value * goingRate).toFixed(2)
     }
     if(newSelections.base === newSelections.convertTo) {
@@ -205,7 +204,7 @@ class Home extends React.Component {
 
   render() {
     const { selections, rates, goingRate } = this.state
-    console.log(rates);
+
     return (
       <>
       <Title />
