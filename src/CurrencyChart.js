@@ -43,6 +43,7 @@ class Chart extends React.Component {
           <div className="table">
             <h1 className="chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
             <HeadRow />
+            <div id="chartValues">
             {(() => {
               return currencyRates.map((currency) => {
                 let cur, rate;
@@ -53,6 +54,7 @@ class Chart extends React.Component {
                 return <DataRow key={cur} currency={cur} rate={rate} baseValue={baseValue} />
               })
             })()}
+            </div>
           </div>
         </div>
       )

@@ -23,17 +23,16 @@ function App() {
   return (
     <>
     <Router>
-      <Background>
-        <Navi/>
-          <Switch>
-            <Route path="/portfolio" component={Portfolio} />
-            <Route path="/" component={Home} />
-          </Switch>
+      <Navi/>
+        <Switch>
+          <Route path="/portfolio" component={Portfolio} />
+          <Route path="/" component={Home} />
+        </Switch>
       <Footer />
-    </Background>
     </Router>
     </>
   );
 }
 
 export default App;
+//tessa is cute//

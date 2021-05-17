@@ -42,7 +42,7 @@ function randomLocation(currencyRates, goingRate, baseValue) {
 }
 
 
-class BangforBuck extends React.Component {
+class ChanceDestinations extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -71,4 +71,4 @@ class BangforBuck extends React.Component {
   
 }
 
-export default BangforBuck;
+export default ChanceDestinations;

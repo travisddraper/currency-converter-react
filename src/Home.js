@@ -9,7 +9,7 @@ import DropdownType from 'react-bootstrap/Dropdown';
 import {json, checkStatus } from './utils.js'
 
 import Chart from './CurrencyChart.js'
-import BangforBuck from './BangforBuck.js'
+import ChanceDestination from './ChanceDestination.js'
 
 
 const Title = () =>  <h1 id="pageTitle">Travel Money</h1> 
@@ -88,7 +88,7 @@ const CurrencyForm = (props) => {
     <form className="row formRow px-2">
       <ConversionSection title={base} rateNames={rateNames} conversion={conversion.baseValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} changeFunction={baseChange} direction="base" />
       <div className="col-1 arrow">
-        <MDBIcon  icon="angle-right" size="3x" />
+        <MDBIcon  icon="angle-right" size="2x" />
       </div>
       <ConversionSection title={convertTo} rateNames={rateNames} conversion={conversion.convertToValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} changeFunction={convertChange}  direction="convertTo" />
     </form>
@@ -110,7 +110,7 @@ const ConverterBox = (props) => {
             <Link to="/chart">Currency Chart</Link>
           </button>
           <button className="topRightButton">
-            <Link to="/bangforbuck">Bang for Your Buck</Link>
+            <Link to="/ChanceDestination">Chance Destinations</Link>
           </button>
         </div>
         <CurrencyForm selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={convertChange} baseChange={baseChange} />
@@ -236,11 +236,11 @@ class Home extends React.Component {
     
     return (
       <>
-      <Title />
       <div className="container">
+      <Title />
       <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={this.handleCurrencyChange} convertChange={this.currencyChangeConvertTo} baseChange={this.currencyChangeBase} currencyExchangeCalculator={this.currencyExchangeCalculator} />
         <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />
-        <Route path="/bangforbuck" render={()=> <BangforBuck rates={rates} baseValue={conversion.baseValue} />} />
+        <Route path="/ChanceDestination" render={()=> <ChanceDestination rates={rates} baseValue={conversion.baseValue} />} />
       </div>
     </>
     )
