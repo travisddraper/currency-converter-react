@@ -21,6 +21,7 @@
 
 
 
+
 /* --------------- GENERICS ------------ */
 
 input::-webkit-outer-spin-button,
@@ -247,7 +248,7 @@ button:focus {
 /* ------------ CURRENCY CHART ------------ */
 
 .currencyChart {
-  margin-top: 350px;
+  margin-top: 326px;
 }
 
 .chartTitle {
@@ -261,7 +262,8 @@ button:focus {
   left: 0;
 
 }
-.currencyChartChoice {
+.currencyChartChoice,
+.currencySymbol {
   color: red;
 }
 @media(max-width: 991px) {
@@ -301,7 +303,9 @@ button:focus {
 
 .tableRow {
   justify-content:space-evenly;
+  text-align: center;
   padding-bottom: 5px;
+  font-weight: 500;
 }
 
 
@@ -309,7 +313,7 @@ button:focus {
 /* ------------- BANG FOR YOUR BUCK ---------- */
 
 .destinationTitle {
-  margin-top: 200px;
+  margin-top: 170px;
   padding-left: 165px;
   color: white;
   text-shadow: 2px 2px grey;
@@ -344,10 +348,14 @@ button:focus {
   max-width: 100%;
   align-items: center;
   font-size: 25px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .arrow {
+  color: red;
+}
+
+.travel {
   color: red;
 }
 

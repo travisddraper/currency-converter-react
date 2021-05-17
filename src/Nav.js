@@ -16,7 +16,7 @@ class Navigation extends React.Component {
 
         return (
             <>
-            <Navbar expand="false">
+            <Navbar expand="false" sticky="top" collapseOnSelect="false"> 
             <Navbar.Toggle className="navButton" aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

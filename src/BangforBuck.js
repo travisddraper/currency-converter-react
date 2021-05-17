@@ -1,34 +1,56 @@
 import React from 'react';
 import { MDBRow, MDBCol, MDBIcon, MDBBtn } from "mdbreact";
 import { Redirect } from 'react-router';
+import {currencyTracker} from './utils.js'
+import getSymbolFromCurrency from 'currency-symbol-map'
 
-function Title(props) {
- 
-  return(
-    <h1 className={props.location}>Best <span style={{color: "red"}}>Destinations</span><br /> for your Money!</h1>
+const Title = (props) => <h1 className={props.location}>Chance <span style={{color: "red"}}>Destinations</span><br /> with your Money!</h1>
+
+function Destination(props) {
+  const {destination, money, currency } = props
+
+   return (
+    <div className="destination col-4">
+      <MDBIcon className="d-inline mb-3 pr-2 arrow" icon="angle-right" />
+      <p>
+        Travel to <a className="travel" href={`https://en.wikipedia.org/wiki/${destination}`} target="_blank">{destination.replace(/_/g, ' ')}</a> and have {(parseInt(money)).toLocaleString()}<span className="travel">{getSymbolFromCurrency(currency)}</span>!
+      </p>
+    </div>
   )
 }
 
-class Destination extends React.Component {
-  constructor(props) {
-    super(props)
+function randomLocation(currencyRates, goingRate, baseValue) {
+  let locations = [];
+  for(let i=1; i<=3; i++) {
+    let pick = currencyRates[Math.floor(Math.random() * (currencyRates.length))];
+    for(const key in pick) {
+      let money = (pick[key] * baseValue).toFixed(2);
+      let temp = key;
+      for(const location in currencyTracker) {
+        if (location === key) {
+          temp = currencyTracker[location]
+        }
+      }
+      locations.push({
+        currency: key,
+        location: temp,
+        money: money,
+      })
+    }
   }
-
-  render() {
-
-    return (
-
-      <div className="destination col-4">
-        <MDBIcon className="d-inline mb-3 pr-2 arrow" icon="angle-right" />
-        <p>Travel to <b>destination</b> and have 55.67 <b>Currency</b>!</p>
-      </div>
-    )
-  }
+  return locations
 }
 
+
 class BangforBuck extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
     render() {
+      const { rates, baseValue } = this.props;
+      const { goingRate, currencyRates } = rates
+      const locations = randomLocation(currencyRates, goingRate, baseValue)
       return (
         <>
           <Title location="Bang1 destinationTitle" />
@@ -36,9 +58,11 @@ class BangforBuck extends React.Component {
             <div className="col-1 col-md-2 col-lg-3 col-xl-4 v1">
             </div>
             <div className="col-11 col-md-10 col-lg-9 col-xl-8 info row">
-              <Destination />
-              <Destination />
-              <Destination />
+            {(() => {
+              return locations.map((travel) => {
+                return <Destination destination={travel.location} money={travel.money} currency={travel.currency} />
+              })
+            })()}
             </div>
           </div>
         </>

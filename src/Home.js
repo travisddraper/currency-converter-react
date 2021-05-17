@@ -18,6 +18,7 @@ const Title = () =>  <h1 id="pageTitle">Travel Money</h1>
 const DropdownCurrency = (props) => {
   const {rateNames, onChange, direction, title} = props;
 
+
   return (
     <DropdownButton 
       id="currencyButton" 
@@ -35,19 +36,7 @@ const DropdownCurrency = (props) => {
 }
 
 const ConversionSection = (props) => {
-  const {title, rateNames, onChange, direction, conversion, goingRate} = props
-
-  function conversionCalculator(direction, goingRate) {
-    let value = document.getElementById(direction).value;
-
-    if(direction === 'base') {
-      document.getElementById('convertTo').value = (value * goingRate).toFixed(2);
-      return
-    }
-
-    document.getElementById('base').value = (value / goingRate).toFixed(2);
-    return
-  }
+  const {title, rateNames, onChange, direction, goingRate, changeFunction, conversion } = props
 
   return (
     <div className="col-5 conversion">
@@ -56,10 +45,11 @@ const ConversionSection = (props) => {
           <>  
             <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
             <input
-              placeholder={`00.00 ${conversion}`}
+              placeholder={`00.00 ${title}`}
               id={direction}
               type="number"
-              onChange={()=>{conversionCalculator(direction, goingRate)}}
+              onChange={changeFunction}
+              value={conversion}
             >  
             </input>
           </>
@@ -67,10 +57,11 @@ const ConversionSection = (props) => {
         : (
           <>
             <input
-              placeholder={`00.00 ${conversion}`}
+              placeholder={`00.00 ${title}`}
               id={direction}
               type="number"
-              onChange={()=>{conversionCalculator(direction, goingRate)}}
+              onChange={changeFunction}
+              value={conversion}
             >  
             </input>
             <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
@@ -83,25 +74,30 @@ const ConversionSection = (props) => {
 
 const CurrencyForm = (props) => {
   const { base, convertTo } = props.selections
-  const { rates, handleCurrencyChange, goingRate } = props
+  const { rates, handleCurrencyChange, convertChange, baseChange, conversion } = props
 
-  const rateNames = rates.map((currency) => {
-    for(const key in currency) { return key; }
+  const rateNames = rates.currencyRates.map((currency) => {
+    for(const key in currency) { 
+      if(convertTo !== key) {
+        return key; 
+      }
+    }
   })
 
   return (
     <form className="row formRow px-2">
-      <ConversionSection title={base} rateNames={rateNames} goingRate={goingRate} onChange={handleCurrencyChange} direction="base" conversion={base} />
+      <ConversionSection title={base} rateNames={rateNames} conversion={conversion.baseValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} changeFunction={baseChange} direction="base" />
       <div className="col-1 arrow">
-        <MDBIcon className="" icon="angle-right" size="3x" />
+        <MDBIcon  icon="angle-right" size="3x" />
       </div>
-      <ConversionSection title={convertTo} rateNames={rateNames} goingRate={goingRate} onChange={handleCurrencyChange} direction="convertTo" conversion={convertTo} />
+      <ConversionSection title={convertTo} rateNames={rateNames} conversion={conversion.convertToValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} changeFunction={convertChange}  direction="convertTo" />
     </form>
   )
 }
 
 const ConverterBox = (props) => {
-  const { selections, rates, handleCurrencyChange, goingRate } = props;
+
+  const { selections, rates, baseChange, convertChange, handleCurrencyChange, conversion } = props;
 
   return (
     <div className="currencyCoverter box">
@@ -114,10 +110,10 @@ const ConverterBox = (props) => {
             <Link to="/chart">Currency Chart</Link>
           </button>
           <button className="topRightButton">
-            <Link to="/chart/bangforbuck">Bang for Your Buck</Link>
+            <Link to="/bangforbuck">Bang for Your Buck</Link>
           </button>
         </div>
-        <CurrencyForm selections={selections} goingRate={goingRate} rates={rates} handleCurrencyChange={handleCurrencyChange} />
+        <CurrencyForm selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={convertChange} baseChange={baseChange} />
       </div>
     </div>
   )
@@ -130,24 +126,55 @@ class Home extends React.Component {
     super(props);
     this.state = {
       error: '',
-      rates: [],
-      selections: {
-        base: 'EUR',
-        convertTo: 'USD',
+      rates: {
+        goingRate: 0,
+        currencyRates: [],
       },
-      goingRate: 0,
+      selections: {
+        base: 'USD',
+        convertTo: 'EUR',
+      },
+      conversion: {
+        baseValue: '',
+        convertToValue: '',
+      }
     }
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+    this.currencyChangeBase = this.currencyChangeBase.bind(this);
+    this.currencyChangeConvertTo = this.currencyChangeConvertTo.bind(this);
   }
 
     
   handleCurrencyChange(conversion, currency) {
+    
     const newSelections = {
         ...this.state.selections,
         [conversion]: currency,
     }
   
     this.setState({ selections: newSelections })
+  }
+
+  currencyChangeBase(event) {
+    const convertValue = (event.target.value * this.state.rates.goingRate).toFixed(2)
+
+    this.setState({ 
+      conversion: {
+        baseValue: event.target.value,
+        convertToValue: convertValue, 
+      }
+    })
+  }
+
+  currencyChangeConvertTo(event) {
+    const convertValue = (event.target.value / this.state.rates.goingRate).toFixed(2)
+ 
+    this.setState({ 
+      conversion: {
+        baseValue: convertValue,
+        convertToValue: event.target.value, 
+      }
+    })
   }
 
   currencyUpdate(data) {
@@ -165,24 +192,26 @@ class Home extends React.Component {
     }
 
     this.setState({ 
-      goingRate: goingRate,
-      rates: newRates,
+      rates: {
+        goingRate: goingRate,
+        currencyRates: newRates,
+      },
       selections: newSelections,
     })
 
+    
     if(conversion.value) {
       conversion.value = (base.value * goingRate).toFixed(2)
     }
-    if(newSelections.base === newSelections.convertTo) {
-      conversion.value = base.value
-    }
+    
   }
 
   componentDidMount () {
-    fetch("https://altexchangerateapi.herokuapp.com/latest")
+    fetch("https://altexchangerateapi.herokuapp.com/latest?from=USD")
     .then(checkStatus)
     .then(json)
     .then((data) => {
+
       this.currencyUpdate(data);
     })
     .catch((error) => {
@@ -203,15 +232,15 @@ class Home extends React.Component {
   }
 
   render() {
-    const { selections, rates, goingRate } = this.state
-
+    const { selections, rates, conversion } = this.state
+    
     return (
       <>
       <Title />
       <div className="container">
-        <ConverterBox selections={selections} goingRate={goingRate} rates={rates} handleCurrencyChange={this.handleCurrencyChange} />
-        <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} />} />
-        <Route path="/chart/bangforbuck" render={()=> <BangforBuck />} />
+      <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={this.handleCurrencyChange} convertChange={this.currencyChangeConvertTo} baseChange={this.currencyChangeBase} currencyExchangeCalculator={this.currencyExchangeCalculator} />
+        <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />
+        <Route path="/bangforbuck" render={()=> <BangforBuck rates={rates} baseValue={conversion.baseValue} />} />
       </div>
     </>
     )

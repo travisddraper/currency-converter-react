@@ -1,20 +1,29 @@
 import React from 'react';
+import getSymbolFromCurrency from 'currency-symbol-map'
 
-class DataRow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const DataRow = (props) => {
+  const{baseValue, currency, rate} = props
+ 
+  const price = (baseValue, rate) => ( (baseValue * rate).toLocaleString() )
 
-  render() {
-    
-    return (
-      <div className="row tableRow dataRow">
-        <div className="data">USD</div>
-        <div className="data">1.15</div>
-        <div className="data">50.00</div>
-      </div>
+  return (
+    <div className="row tableRow dataRow">
+      <div className="data dataCurrency col-4">{currency}</div>
+      <div className="data dataRate col-4">{rate}</div>
+      <div className="data dataAmount col-4">{price(baseValue, rate)}<span className="currencySymbol"> {getSymbolFromCurrency(currency)}</span></div>
+    </div>
     )
-  }
+}
+
+const HeadRow = (props) => {
+
+  return (
+    <div className="row tableRow headRow">
+      <div className="data col-4">Currency</div>
+      <div className="data col-4">Exchange Rate</div>
+      <div className="data col-4">Amount</div>
+    </div>
+  )
 }
 
 
@@ -23,22 +32,27 @@ class Chart extends React.Component {
     super(props)
   }
 
-    render() {
 
+
+    render() {
+      const { rates, base, baseValue } = this.props
+      const { currencyRates } = rates
+      
       return (
         <div className="currencyChart">
           <div className="table">
-            <h1 className="chartTitle">Convert <span className="currencyChartChoice">{this.props.base}</span> to ...</h1>
-            <div className="row tableRow headRow">
-              <div className="data">Forgein Currency</div>
-              <div className="data">Exchange Rate</div>
-              <div className="data">Amount</div>
-            </div>
-            <DataRow />
-            <DataRow />
-            <DataRow />
-            <DataRow />
-            <DataRow />
+            <h1 className="chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
+            <HeadRow />
+            {(() => {
+              return currencyRates.map((currency) => {
+                let cur, rate;
+                for(const key in currency) {
+                  cur = key;
+                  rate = currency[key];
+                }
+                return <DataRow key={cur} currency={cur} rate={rate} baseValue={baseValue} />
+              })
+            })()}
           </div>
         </div>
       )
