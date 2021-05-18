@@ -30,27 +30,32 @@ import Portfolio from './Portfolio.js'
 class App extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      windowHeight: window.innerHeight
+    }
   }
 
   //Below is fixing an issue with CSS "background-attachment: fixed" on mobile browsers
   //in which the background momentarily stutters and visibly resizes as
   //the url slides up to hidden
   componentDidMount() {
-    window.addEventListener('touchmove resize', () =>{
-      let vh = window.innerHeight * 0.01
-      document.documentElement.style.setProperty("--vh", `${vh}px`)
-      //document.getElementById('root').setAttribute("style", `min-height: ${window.innerHeight}px`)
+    window.addEventListener('resize', () =>{
+      /*let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty("--vh", `${vh}px`)*/
+      this.setState ({ windowHeight: window.innerHeight })
+      document.getElementById('root').setAttribute("style", `min-height: ${window.innerHeight}px`)
     })
   }
 
   render() {
-    let vh = window.innerHeight * 0.01
-    document.documentElement.style.setProperty("--vh", `${vh}px`)
-
+    /*let vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty("--vh", `${vh}px`)*/
+    document.getElementById('root').setAttribute("style", `min-height: ${window.innerHeight}px`)
     return (
       <>
       <Router>
           <Navi/>
+          <div className="align-text-center">{this.state.windowHeight}</div>
             <Switch>
               <Route path="/portfolio" component={Portfolio} />
               <Route path="/" component={Home} />
