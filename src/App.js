@@ -55,7 +55,7 @@ class App extends React.Component {
       <>
       <Router>
           <Navi/>
-          <div className="align-text-center">{this.state.windowHeight}</div>
+          <div className="special">{this.state.windowHeight}</div>
             <Switch>
               <Route path="/portfolio" component={Portfolio} />
               <Route path="/" component={Home} />
