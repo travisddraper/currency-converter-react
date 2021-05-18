@@ -1,22 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import { Nav } from 'react-bootstrap';
-import Home from './Home.js';
 
-import { MDBRow, MDBCol, MDBIcon } from "mdbreact";
+import { MDBIcon } from "mdbreact";
 
 
-class Navigation extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+export function Navi() {
 
-    render() {
-
-        return (
-            <>
-            <Navbar expand="false" sticky="top" > 
+    return (
+        <Navbar expand="false" sticky="top" > 
             <Navbar.Toggle className="navButton" aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
@@ -24,13 +17,11 @@ class Navigation extends React.Component {
                     <Link className="navLink" to="/portfolio">Portfolio</Link>
                 </Nav>
             </Navbar.Collapse>
-            </Navbar>
-            </>
-        )
-    }
+        </Navbar>
+    )
 }
 
-function FooterNav() {
+export function Footer() {
 
     return (
         <div id="socialMediaFooter">
@@ -46,6 +37,3 @@ function FooterNav() {
         </div>
     )
 }
-
-export const Navi = Navigation;
-export const Footer = FooterNav;

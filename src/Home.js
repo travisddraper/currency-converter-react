@@ -1,10 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
-import { MDBRow, MDBCol, MDBIcon, MDBBtn } from "mdbreact";
+import { MDBIcon } from "mdbreact";
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownType from 'react-bootstrap/Dropdown';
 
 import {json, checkStatus } from './utils.js'
 
@@ -35,7 +34,7 @@ const DropdownCurrency = (props) => {
 }
 
 const ConversionSection = (props) => {
-  const {title, rateNames, onChange, direction, goingRate, changeFunction, conversion } = props
+  const {title, rateNames, onChange, direction, changeFunction, conversion } = props
 
   return (
     <>
@@ -229,14 +228,12 @@ class Home extends React.Component {
     const { selections, rates, conversion } = this.state
 
     return (
-      <>
       <div className="container">
-      <Title />
-      <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={this.handleCurrencyChange} convertChange={this.currencyChangeConvertTo} baseChange={this.currencyChangeBase} currencyExchangeCalculator={this.currencyExchangeCalculator} />
+        <Title />
+        <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={this.handleCurrencyChange} convertChange={this.currencyChangeConvertTo} baseChange={this.currencyChangeBase} currencyExchangeCalculator={this.currencyExchangeCalculator} />
         <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />
-        <Route path="/ChanceDestination" render={()=> <ChanceDestination rates={rates} baseValue={conversion.baseValue} />} />
+        <Route path="/ChanceDestination" render={()=> <ChanceDestination currencyRates={rates.currencyRates} baseValue={conversion.baseValue} />} />
       </div>
-    </>
     )
   }
 }

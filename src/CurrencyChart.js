@@ -15,8 +15,7 @@ const DataRow = (props) => {
     )
 }
 
-const HeadRow = (props) => {
-
+const HeadRow = () => {
   return (
     <div className="row tableRow headRow">
       <div className="data col-4">Currency</div>
@@ -27,40 +26,31 @@ const HeadRow = (props) => {
 }
 
 
-class Chart extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+function Chart(props) {
 
+  const { rates, base, baseValue } = props
+  const { currencyRates } = rates
 
-
-    render() {
-      const { rates, base, baseValue } = this.props
-      const { currencyRates } = rates
-
-      return (
-        <div className="currencyChart">
-
-          <div className="table">
-            <h1 className="chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
-            <HeadRow />
-            <div id="chartValues">
-            {(() => {
-              return currencyRates.map((currency) => {
-                let cur, rate;
-                for(const key in currency) {
-                  cur = key;
-                  rate = currency[key];
-                }
-                return <DataRow key={cur} currency={cur} rate={rate} baseValue={baseValue} />
-              })
-            })()}
-            </div>
-          </div>
+  return (
+    <div className="currencyChart">
+      <div className="table">
+        <h1 className="chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
+        <HeadRow />
+        <div id="chartValues">
+          {(() => {
+            return currencyRates.map((currency) => {
+              let cur, rate;
+              for(const key in currency) {
+                cur = key;
+                rate = currency[key];
+              }
+              return <DataRow key={cur} currency={cur} rate={rate} baseValue={baseValue} />
+            })
+          })()}
         </div>
-      )
-    }
-    
+      </div>
+    </div>
+  )
 }
 
 export default Chart
