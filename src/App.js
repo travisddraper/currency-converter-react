@@ -39,9 +39,9 @@ class App extends React.Component {
   //in which the background momentarily stutters and visibly resizes as
   //the url slides up to hidden
   componentDidMount() {
-    window.addEventListener('resize', () =>{
+    window.addEventListener('touchmove', () =>{
       /*let vh = window.innerHeight * 0.01
-      document.documentElement.style.setProperty("--vh", `${vh}px`)*/
+      document.documentElement.style.setProperty("--vh", `${vh}px`) */
       this.setState ({ windowHeight: window.innerHeight })
       document.getElementById('root').setAttribute("style", `min-height: ${window.innerHeight}px`)
     })
