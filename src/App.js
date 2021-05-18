@@ -23,12 +23,12 @@ function App() {
   return (
     <>
     <Router>
-      <Navi/>
-        <Switch>
-          <Route path="/portfolio" component={Portfolio} />
-          <Route path="/" component={Home} />
-        </Switch>
-      <Footer />
+        <Navi/>
+          <Switch>
+            <Route path="/portfolio" component={Portfolio} />
+            <Route path="/" component={Home} />
+          </Switch>
+        <Footer />
     </Router>
     </>
   );
