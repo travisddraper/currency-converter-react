@@ -137,7 +137,7 @@ class Home extends React.Component {
       conversion: {
         baseValue: '',
         convertToValue: '',
-      }
+      },
     }
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.currencyChangeBase = this.currencyChangeBase.bind(this);
@@ -206,7 +206,6 @@ class Home extends React.Component {
     .then(checkStatus)
     .then(json)
     .then((data) => {
-
       this.currencyUpdate(data);
     })
     .catch((error) => {
@@ -228,7 +227,7 @@ class Home extends React.Component {
 
   render() {
     const { selections, rates, conversion } = this.state
-    
+
     return (
       <>
       <div className="container">

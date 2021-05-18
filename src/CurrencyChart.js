@@ -37,9 +37,10 @@ class Chart extends React.Component {
     render() {
       const { rates, base, baseValue } = this.props
       const { currencyRates } = rates
-      
+
       return (
         <div className="currencyChart">
+
           <div className="table">
             <h1 className="chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
             <HeadRow />

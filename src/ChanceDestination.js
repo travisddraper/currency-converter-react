@@ -48,9 +48,11 @@ class ChanceDestinations extends React.Component {
   }
 
     render() {
+
       const { rates, baseValue } = this.props;
       const { goingRate, currencyRates } = rates
       const locations = randomLocation(currencyRates, goingRate, baseValue)
+      
       return (
         <div className="chanceDestination">
           <Title location="Bang1 destinationTitle" />

@@ -37,23 +37,13 @@ button:focus {
 
 
 /* -------------- BACKGROUND ---------- */
-html,
-body {
-  height: 100%
-}
-.special {
-  position: fixed;
-  left: 100px;
-  top: 100px
-}
-
 #root {
   background-image: url('./images/travel_background.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:cover;
   background-position: center;
-  background-attachment: fixed;
-  min-height: calc(100vh - calc(100vh - 100%));
+  background-attachment: fixed; 
+
   /*min-height: calc(var(--vh, 1vh) * 100)*/
 
 }
