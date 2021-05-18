@@ -146,18 +146,15 @@ class Home extends React.Component {
 
     
   handleCurrencyChange(conversion, currency) {
-    
     const newSelections = {
         ...this.state.selections,
         [conversion]: currency,
     }
-  
     this.setState({ selections: newSelections })
   }
 
   currencyChangeBase(event) {
     const convertValue = (event.target.value * (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
-
     this.setState({ 
       conversion: {
         baseValue: event.target.value,
@@ -168,7 +165,6 @@ class Home extends React.Component {
 
   currencyChangeConvertTo(event) {
     const convertValue = (event.target.value / (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
- 
     this.setState({ 
       conversion: {
         baseValue: convertValue,
