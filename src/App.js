@@ -36,11 +36,11 @@ class App extends React.Component {
     
   }
 
-  //Below is fixing an issue with background-attachment: fixed on mobile browsers
+  //Below is fixing an issue with CSS "background-attachment: fixed" on mobile browsers
   //in which the background momentarily stutters and visibly resizes as
   //the url slides up to hidden
   componentDidMount() {
-    window.addEventListener('resize', () =>{
+    window.addEventListener('touchmove', () =>{
       this.setState({ screenHeight: window.innerHeight })
       document.getElementById('root').setAttribute("style", `min-height: ${this.state.screenHeight}px`)
     })
