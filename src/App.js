@@ -30,24 +30,22 @@ import Portfolio from './Portfolio.js'
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      screenHeight: window.screenHeight,
-    }
-    
   }
 
   //Below is fixing an issue with CSS "background-attachment: fixed" on mobile browsers
   //in which the background momentarily stutters and visibly resizes as
   //the url slides up to hidden
   componentDidMount() {
-    window.addEventListener('touchmove', () =>{
-      this.setState({ screenHeight: window.innerHeight })
-      document.getElementById('root').setAttribute("style", `min-height: ${this.state.screenHeight}px`)
+    window.addEventListener('touchmove resize', () =>{
+      let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty("--vh", `${vh}px`)
+      //document.getElementById('root').setAttribute("style", `min-height: ${window.innerHeight}px`)
     })
   }
 
   render() {
-    document.getElementById('root').setAttribute("style", `min-height: ${window.innerHeight}px`)
+    let vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty("--vh", `${vh}px`)
 
     return (
       <>
