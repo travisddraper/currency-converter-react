@@ -18,7 +18,6 @@ const Title = () =>  <h1 id="pageTitle">Travel Money</h1>
 const DropdownCurrency = (props) => {
   const {rateNames, onChange, direction, title} = props;
 
-
   return (
     <DropdownButton 
       id="currencyButton" 
@@ -39,38 +38,41 @@ const ConversionSection = (props) => {
   const {title, rateNames, onChange, direction, goingRate, changeFunction, conversion } = props
 
   return (
-    <div className="col-5 conversion">
-      {direction === 'base' 
-        ? (
-          <>  
-            <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
-            <input
-              placeholder={`00.00 ${title}`}
-              id={direction}
-              type="number"
-              onChange={changeFunction}
-              value={conversion}
-            >  
-            </input>
-          </>
-          )
-        : (
-          <>
-            <input
-              placeholder={`00.00 ${title}`}
-              id={direction}
-              type="number"
-              onChange={changeFunction}
-              value={conversion}
-            >  
-            </input>
-            <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
-          </>
-          )
-      }
-    </div>
+    <>
+    {direction === "base" 
+    ? (
+      <div className="col-12 col-sm-5 conversionBase conversion">
+        <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
+        <input
+          placeholder={`00.00 ${title}`}
+          id={direction}
+          type="number"
+          onChange={changeFunction}
+          value={conversion}
+          className="ml-2 ml-sm-0"
+        >  
+        </input>
+      </div>
+      )
+    : (
+      <div className="col-12 col-sm-5 conversionTo conversion">
+        <input
+          placeholder={`00.00 ${title}`}
+          id={direction}
+          type="number"
+          onChange={changeFunction}
+          value={conversion}
+          className="mr-2 mr-sm-0"
+        >  
+        </input>
+        <DropdownCurrency className="mr-2" title={title} rateNames={rateNames} onChange={onChange} direction={direction} />
+      </div>
+      )
+  }
+  </>
   )
 }
+
 
 const CurrencyForm = (props) => {
   const { base, convertTo } = props.selections
@@ -78,16 +80,14 @@ const CurrencyForm = (props) => {
 
   const rateNames = rates.currencyRates.map((currency) => {
     for(const key in currency) { 
-      if(convertTo !== key) {
-        return key; 
-      }
+      return key
     }
   })
 
   return (
     <form className="row formRow px-2">
       <ConversionSection title={base} rateNames={rateNames} conversion={conversion.baseValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} changeFunction={baseChange} direction="base" />
-      <div className="col-1 arrow">
+      <div className="col-12 col-sm-1 mt-sm-2 mt-md-0 conversionArrow arrow">
         <MDBIcon  icon="angle-right" size="2x" />
       </div>
       <ConversionSection title={convertTo} rateNames={rateNames} conversion={conversion.convertToValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} changeFunction={convertChange}  direction="convertTo" />
@@ -156,7 +156,7 @@ class Home extends React.Component {
   }
 
   currencyChangeBase(event) {
-    const convertValue = (event.target.value * this.state.rates.goingRate).toFixed(2)
+    const convertValue = (event.target.value * (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
 
     this.setState({ 
       conversion: {
@@ -167,7 +167,7 @@ class Home extends React.Component {
   }
 
   currencyChangeConvertTo(event) {
-    const convertValue = (event.target.value / this.state.rates.goingRate).toFixed(2)
+    const convertValue = (event.target.value / (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
  
     this.setState({ 
       conversion: {
@@ -198,7 +198,6 @@ class Home extends React.Component {
       },
       selections: newSelections,
     })
-
     
     if(conversion.value) {
       conversion.value = (base.value * goingRate).toFixed(2)

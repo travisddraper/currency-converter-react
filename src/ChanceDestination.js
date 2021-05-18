@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import {currencyTracker} from './utils.js'
 import getSymbolFromCurrency from 'currency-symbol-map'
 
-const Title = (props) => <h1 className={props.location}>Chance <span style={{color: "red"}}>Destinations</span><br /> with your Money!</h1>
+const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span style={{color: "red"}}>Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>
 
 function Destination(props) {
   const {destination, money, currency } = props
@@ -52,20 +52,20 @@ class ChanceDestinations extends React.Component {
       const { goingRate, currencyRates } = rates
       const locations = randomLocation(currencyRates, goingRate, baseValue)
       return (
-        <>
+        <div className="chanceDestination">
           <Title location="Bang1 destinationTitle" />
-          <div className="bangBuck row box2">
+          <div className="destinationRow row box2">
             <div className="col-1 col-md-2 col-lg-3 col-xl-4 v1">
             </div>
             <div className="col-11 col-md-10 col-lg-9 col-xl-8 info row">
             {(() => {
               return locations.map((travel) => {
-                return <Destination destination={travel.location} money={travel.money} currency={travel.currency} />
+                return <Destination key={travel.location }destination={travel.location} money={travel.money} currency={travel.currency} />
               })
             })()}
             </div>
           </div>
-        </>
+        </div>
       )
     }
   
