@@ -14,10 +14,10 @@ function randomizer(currencyRates) {
       if(values.length >= 1 && values.indexOf(temp) !== -1) {
         return randomChecker()
       } 
-
       values.push(temp) 
       }
   
+      
     for(let i=1;i<=3;i++) {
       randomChecker(values);
     }
@@ -77,6 +77,9 @@ function ChanceDestinations(props) {
         <div className="col-1 col-md-2 col-lg-3 col-xl-4 v1"></div>
         <div className="col-11 col-md-10 col-lg-9 col-xl-8 info row">
           {(() => {
+            if(baseValue === '') {
+              return <div className="destination warning">Add some cash above, and let's check out those travel locations!</div>
+            }
             return locations.map((travel) => {
               return <Destination key={travel.location} destination={travel.location} money={travel.money} currency={travel.currency} />
             })

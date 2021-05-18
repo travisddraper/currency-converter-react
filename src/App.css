@@ -367,22 +367,6 @@ button:focus {
   height: 500px;
 }
 
-@media(max-width: 767px) {
-  .chanceDestination {
-    background-color: rgba(250, 250, 250, 0.5);
-    box-shadow: 2px 2px 5px black;
-    border-radius: 15px;
-    width: 80%;
-    margin: 0 auto;
-  }
-  .v1 {
-    display: none;
-  }
-  .textRemove {
-    display: none;
-  }
-}
-
 .info {
   flex-direction: column;
 }
@@ -404,6 +388,33 @@ button:focus {
   align-items: center;
   font-size: 25px;
   font-weight: 500;
+}
+
+.warning {
+  display: flex;
+  text-align: center; 
+  margin-top: 150px;
+}
+
+@media(max-width: 767px) {
+  .chanceDestination {
+    background-color: rgba(250, 250, 250, 0.5);
+    box-shadow: 2px 2px 5px black;
+    border-radius: 15px;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+  }
+  .v1 {
+    display: none;
+  }
+  .textRemove {
+    display: none;
+  }
+  .warning {
+    margin-top: 10px;
+    padding-bottom: 50px;
+  }
 }
 
 .arrow {
