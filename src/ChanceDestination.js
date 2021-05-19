@@ -4,50 +4,34 @@ import {currencyTracker} from './utils.js'
 import getSymbolFromCurrency from 'currency-symbol-map'
 
 
-function randomizer(currencyRates) {
-  if(currencyRates.length > 0) {
-    let values = [];
-
-    function randomChecker() {
-      let temp = Math.floor(Math.random() * (currencyRates.length))
-
-      if(values.length >= 1 && values.indexOf(temp) !== -1) {
-        return randomChecker()
-      } 
-      values.push(temp) 
-      }
-  
-      
-    for(let i=1;i<=3;i++) {
-      randomChecker(values);
-    }
-    return values
-  }
-  return []
-}
-
 function randomLocation(currencyRates, baseValue) {
   let locations = [];
-  let values = randomizer(currencyRates);
+  let chanceDestinations = [];
+  let values = currencyRates.slice();
+ 
+  for(let i=1; i<=3; i++) {
+    locations.push(
+       (values.splice(Math.floor(Math.random()*values.length), 1))[0]
+     )
+  }
 
-  values.forEach((number) => {
-    let pick = currencyRates[number];
-    for(const key in pick) {
-      let money = (pick[key] * baseValue).toFixed(2);
+  locations.forEach((number) => {
+    for(const key in number) {
+      let money = (number[key] * baseValue).toFixed(2);
       let temp = key;
       for(const location in currencyTracker) {
         if (location === key) {
           temp = currencyTracker[location]
         }
       }
-      locations.push({
+      chanceDestinations.push({
         currency: key,
         location: temp,
         money: money,
       })
-    }
-  })  
-  return locations
+     }
+   })  
+  return chanceDestinations
 }
 
 const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span style={{color: "red"}}>Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>
