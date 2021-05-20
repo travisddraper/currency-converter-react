@@ -11,7 +11,7 @@ function SideNav(props) {
     const {navBar, handleNav } = props
 
     return (
-        <div id="sidebar" className="sidebar col-4 col-lg-3 col-xl-2" aria-label="sidebar" aria-hidden={navBar}>
+        <div id="sidebar" className="sidebar col-4 col-lg-3" aria-label="sidebar" aria-hidden={navBar}>
             <div className="sidebar_content">
                 <button id="sidebarToggle" data-toggle-sidebar="sidebar1" aria-label="sidebar" rotate={navBar} className="toggleTest" onClick={handleNav} >
                     <MDBIcon icon="arrow-right" size="2x" />
