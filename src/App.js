@@ -6,19 +6,33 @@ import {Footer, Navi} from "./Nav.js"
 import Home from "./Home.js"
 import Portfolio from './Portfolio.js'
 
-function App()  {
+class App extends React.Component  {
+  constructor(props) {
+    super(props)
+    this.state = {
+      screenWidth: window.innerWidth,
+    }
+  }
 
-  return (
-    <Router>
-      <Navi/>
-      <Switch>
-        <Route path="/portfolio" component={Portfolio} />
-        <Route path="/" component={Home} />
-      </Switch>
-      <Footer />
-    </Router>
-  )
+  componentDidMount() {
+    window.addEventListener('resize', () => {
+      this.setState({ screenWidth: window.innerWidth})
+    })
+  }
 
+  render() {
+;
+    return (
+      <Router>
+        <Navi screenWidth={this.state.screenWidth} />
+        <Switch>
+          <Route path="/portfolio" component={Portfolio} />
+          <Route path="/" component={Home} />
+        </Switch>
+        <Footer />
+      </Router>
+    )
+  }
 }
 
 export default App;

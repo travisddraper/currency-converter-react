@@ -13,36 +13,127 @@ button:focus {
 
 
 /* -------------- BACKGROUND ---------- */
-#root {
+
+
+
+.container {
   background-image: url('./images/travel_background.jpg');
   background-repeat: no-repeat;
   background-size:cover;
   background-position: center;
   background-attachment: fixed; 
   min-height: 100vh;
-}
-
-.container {
   padding-bottom: 50px;
 }
 
 
 
 /* ----------- NAV.JS ----------------------- */
-.navbar {
-  width: 85px;
+.sidebar {
+  background-color: rgba(0, 0, 0, 1);
+  height: 100vh;
+  min-width: 30% !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding-left: 5px !important;
+}
+
+@media(max-width: 1000px) {
+  .sidebar {
+    min-width: 37% !important;
+  }
+}
+
+
+.sidebar_content {
+  position: relative;
+  height: 100%;
+  padding: 8px 0 8px 8px;
+  margin-left: 8px;
+  margin-right: 25px !important;
+}
+
+.sidebar[aria-hidden="true"] {
+  transition: 300ms;
+  transform: translateX(-87%)
+}
+.sidebar:not([aria-hidden]),
+.sidebar[aria-hidden="false"] {
+  transition: 300ms;
+  transform: translateX(0);
+}
+
+
+.toggleTest {
+  position: absolute;
+  right: -39px;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(250, 250, 250, 0.5);
+  border-radius: 100%;
+  border: none;
+  color: red;
+  transition: 500ms;
+}
+
+@media(min-width: 1200px) {
+  .toggleTest {
+    right: -100px;
+  }
+}
+
+#sidebarToggle[rotate="false"] {
+  transition: 500ms;
+  transform: rotate(180deg);
+}
+
+.navTitle {
+  padding-top: 10px;
+  text-align:center;
+  font-size: 40px !important;
+  color: white;
+  font-weight: 500;
+}
+
+.sideBarBreak {
+  display: flex;
+  height: 2px;
+  border-radius: 100%;
+  color: red;
+  background-color: red;
+  width: 95%;
+  margin: 1rem 0 1rem 0 !important;
+}
+
+.sidebarRow {
+  height: 100%;
+  flex-direction: column;
+  justify-content:space-around;
+  text-align: center;
+  padding-bottom: 200px;
+  margin-right: 5px;
 }
 
 .navLink {
+  padding-left: 10px;
   color: white;
   font-weight: 400;
-  margin-top: 10px;
+  font-size: 25px;
 }
 
-.navLink:hover {
-  color: white;
+.navbar {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
 }
-
+.navbar-collapse {
+  width: 0px !important;
+}
+/*
 @media(max-width:  767px) {
   .navbar {
     box-shadow: none;
@@ -63,7 +154,7 @@ button:focus {
     margin-top: 5px;
   }
 }
-
+*/
 
 /* ------------ PORTFOLIO.JS --------------- */
 
@@ -431,10 +522,24 @@ button:focus {
 
 #socialMediaFooter {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
 }
 
 #socialMediaFooter a {
   color: white;
+}
+
+@media(min-width: 768px) {
+  #socialMediaFooter {
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+@media(max-width: 767px) {
+  #socialMediaFooter {
+    display: flex;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 0.5rem;
+  }
 }

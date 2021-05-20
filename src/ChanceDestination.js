@@ -2,36 +2,26 @@ import React from 'react';
 import { MDBIcon } from "mdbreact";
 import {currencyTracker} from './utils.js'
 import getSymbolFromCurrency from 'currency-symbol-map'
-
+import _ from 'underscore';
 
 function randomLocation(currencyRates, baseValue) {
-  let locations = [];
-  let chanceDestinations = [];
-  let values = currencyRates.slice();
- 
-  for(let i=1; i<=3; i++) {
-    locations.push(
-       (values.splice(Math.floor(Math.random()*values.length), 1))[0]
-     )
-  }
-
-  locations.forEach((number) => {
-    for(const key in number) {
-      let money = (number[key] * baseValue).toFixed(2);
+  return _.sample(currencyRates, 3).map((destination) => {
+    for(const key in destination) {
+      let money = (destination[key] * baseValue).toFixed(2);
       let temp = key;
-      for(const location in currencyTracker) {
-        if (location === key) {
-          temp = currencyTracker[location]
+      for(const name in currencyTracker) {
+        if(name === key) {
+          temp = currencyTracker[name]
+          break;
         }
       }
-      chanceDestinations.push({
+      return {
         currency: key,
         location: temp,
         money: money,
-      })
-     }
-   })  
-  return chanceDestinations
+      }
+    }
+  })
 }
 
 const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span style={{color: "red"}}>Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>

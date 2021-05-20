@@ -212,7 +212,7 @@ class Home extends React.Component {
       console.log(error);
     })
   }
-
+  // FIX YOUR FETCH REQUEST SO THAT IT DOESN'T FETCH WHEN THE CONVERTTO CURRENCY CHANGES, BUT THEN NECESSARY STATE PROPS DO
   componentDidUpdate(prevProps, prevState) {
     if (prevState.selections.base !== this.state.selections.base || prevState.selections.convertTo !== this.state.selections.convertTo) {
       fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.state.selections.base}`)
@@ -226,7 +226,7 @@ class Home extends React.Component {
 
   render() {
     const { selections, rates, conversion } = this.state
-
+    const wrong = false;
     return (
       <div className="container">
         <Title />
@@ -236,8 +236,25 @@ class Home extends React.Component {
       </div>
     )
   }
-}
+} 
 
 
 
 export default Home
+
+/*<Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />*/
+
+/*
+        <Route
+          path ="/chart"
+          component={
+            wrong 
+            ? () => <div className="container">
+                      <div>it was true</div>
+                    </div>
+            : () => <div className="container 2">
+                      <div>It was false!</div>
+                    </div>
+          } 
+        />
+*/
