@@ -54,6 +54,8 @@ button:focus {
   z-index: 5;
   transition: 300ms;
   transform: translateX(-95%);
+  border-top-right-radius: 20%;
+  border-bottom-right-radius: 20%;
 }
 
 
