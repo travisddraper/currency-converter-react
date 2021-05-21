@@ -118,9 +118,6 @@ class Dashboard extends React.Component {
 
     render() {
         const {screenWidth } = this.props
-        const {rates} = this.state
-        const currencyRates = rates.currencyRates;
-
         return (
             <>
             {screenWidth >= 768 
