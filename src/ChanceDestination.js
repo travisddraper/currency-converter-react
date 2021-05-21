@@ -41,7 +41,10 @@ const Destination = (props) => {
 
 function ChanceDestinations(props) {
 
-  const { currencyRates, baseValue } = props;
+  const {rates, conversion } = props.stateProps;
+  const { currencyRates } = rates;
+  const { baseValue } = conversion;
+
   const locations = randomLocation(currencyRates, baseValue)
   
   return (

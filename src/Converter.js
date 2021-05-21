@@ -120,127 +120,22 @@ const ConverterBox = (props) => {
 
 
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: '',
-      rates: {
-        goingRate: 0,
-        currencyRates: [],
-      },
-      selections: {
-        base: 'USD',
-        convertTo: 'EUR',
-      },
-      conversion: {
-        baseValue: '',
-        convertToValue: '',
-      },
-    }
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    this.currencyChangeBase = this.currencyChangeBase.bind(this);
-    this.currencyChangeConvertTo = this.currencyChangeConvertTo.bind(this);
-  }
+function Converter(props) {
 
-    
-  handleCurrencyChange(conversion, currency) {
-    const newSelections = {
-        ...this.state.selections,
-        [conversion]: currency,
-    }
-    this.setState({ selections: newSelections })
-  }
-
-  currencyChangeBase(event) {
-    const convertValue = (event.target.value * (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
-    this.setState({ 
-      conversion: {
-        baseValue: event.target.value,
-        convertToValue: convertValue, 
-      }
-    })
-  }
-
-  currencyChangeConvertTo(event) {
-    const convertValue = (event.target.value / (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
-    this.setState({ 
-      conversion: {
-        baseValue: convertValue,
-        convertToValue: event.target.value, 
-      }
-    })
-  }
-
-  currencyUpdate(data) {
-    let goingRate = 0;
-    let newRates = [];
-    const newSelections = {...this.state.selections, base: data.base }
-    let base = document.getElementById('base')
-    let conversion = document.getElementById('convertTo')
-
-    for (const property in data.rates) {
-      if(this.state.selections.convertTo === property) {
-        goingRate = data.rates[property]
-      }
-      newRates.push( {[property]: data.rates[property]} )
-    }
-
-    this.setState({ 
-      rates: {
-        goingRate: goingRate,
-        currencyRates: newRates,
-      },
-      selections: newSelections,
-    })
-    
-    if(conversion.value) {
-      conversion.value = (base.value * goingRate).toFixed(2)
-    }
-    
-  }
-
-  componentDidMount () {
-    fetch("https://altexchangerateapi.herokuapp.com/latest?from=USD")
-    .then(checkStatus)
-    .then(json)
-    .then((data) => {
-      this.currencyUpdate(data);
-    })
-    .catch((error) => {
-      this.setState({ error: error.message });
-      console.log(error);
-    })
-  }
-  // FIX YOUR FETCH REQUEST SO THAT IT DOESN'T FETCH WHEN THE CONVERTTO CURRENCY CHANGES, BUT THEN NECESSARY STATE PROPS DO
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.selections.base !== this.state.selections.base || prevState.selections.convertTo !== this.state.selections.convertTo) {
-      fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.state.selections.base}`)
-      .then(checkStatus)
-      .then(json)
-      .then((data) => {
-        this.currencyUpdate(data);
-      })
-    }
-  }
-
-  render() {
-    const { selections, rates, conversion } = this.state
+    const { selections, rates, conversion } = props.stateProps
+    const { handleCurrencyChange, currencyChangeBase, currencyChangeConvertTo } = props;
     const wrong = false;
     return (
       <div className="container">
-        <Title />
-        <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={this.handleCurrencyChange} convertChange={this.currencyChangeConvertTo} baseChange={this.currencyChangeBase} currencyExchangeCalculator={this.currencyExchangeCalculator} />
-        <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />
-        <Route path="/ChanceDestination" render={()=> <ChanceDestination currencyRates={rates.currencyRates} baseValue={conversion.baseValue} />} />
+        <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={currencyChangeConvertTo} baseChange={currencyChangeBase} currencyExchangeCalculator={currencyExchangeCalculator} />
       </div>
     )
-  }
+
 } 
 
 
 
-export default Home
+export default Converter
 
 /*<Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />*/
 

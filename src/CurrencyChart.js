@@ -28,8 +28,10 @@ const HeadRow = () => {
 
 function Chart(props) {
 
-  const { rates, base, baseValue } = props
+  const { rates, selections, conversion } = props.stateProps
   const { currencyRates } = rates
+  const { base } = selections
+  const { baseValue } = conversion
 
   return (
     <div className="currencyChart">

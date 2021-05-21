@@ -5,6 +5,11 @@ import {json, checkStatus } from './utils.js'
 
 import Chart from './CurrencyChart.js'
 import ChanceDestination from './ChanceDestination.js'
+import Portfolio from './Portfolio.js'
+import Layout from './Layout.js'
+import Page from './Page.js'
+import Graph from './Graph.js'
+import Converter from './Converter.js'
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -62,9 +67,9 @@ class Dashboard extends React.Component {
         let goingRate = 0;
         let newRates = [];
         const newSelections = {...this.state.selections, base: data.base }
-        let base = document.getElementById('base')
-        let conversion = document.getElementById('convertTo')
-    
+        //let base = document.getElementById('base')
+        //let conversion = document.getElementById('convertTo')
+        
         for (const property in data.rates) {
           if(this.state.selections.convertTo === property) {
             goingRate = data.rates[property]
@@ -80,9 +85,9 @@ class Dashboard extends React.Component {
           selections: newSelections,
         })
         
-        if(conversion.value) {
+        /*if(conversion.value) {
           conversion.value = (base.value * goingRate).toFixed(2)
-        }
+        }*/
         
     }
 
@@ -110,4 +115,99 @@ class Dashboard extends React.Component {
           })
         }
     }
+
+    render() {
+        const {screenWidth } = this.props
+        const {rates} = this.state
+        const currencyRates = rates.currencyRates;
+        console.log(this.state);
+        return (
+            <>
+            {screenWidth >= 768 
+                ? <>
+                    <Route path="/chart" render={() => {
+                        <Page>
+                            <Chart />
+                        </Page>
+                    }}
+                    />
+                    <Route path="/graph" render={() => {
+                        <Page>
+                            <Chart />
+                        </Page>
+                    }}
+                    />
+                    <Route path="/destination" render={() => {
+                        <Page>
+                            <ChanceDestination />
+                        </Page>
+                    }}
+                    />
+                    <Route path="/portfolio" component={Portfolio}
+                    />
+                    <Route exact path="/" render={() => 
+                        <Layout>
+                            <Converter 
+                                stateProps={this.state} 
+                                handleCurrencyChange={this.handleCurrencyChange}
+                                currencyChangeBase={this.currencyChangeBase}  
+                                currencyChangeConvertTo={this.currencyChangeConvertTo}
+                            /> 
+                            <Chart stateProps={this.state} />
+                            <Graph />
+                            <ChanceDestination stateProps={this.state} />
+                        </Layout>
+                        }
+                    />
+                 </>
+                :
+                    <Layout>
+                        <Chart />
+                        <Graph />
+                        <ChanceDestination />
+                        <Converter /> 
+                    </Layout>
+            }
+            </>
+        )
+    }
 }
+
+export default Dashboard
+
+/*
+function Converter() {
+
+    const { selections, rates, conversion } = this.state
+    const wrong = false;
+    return (
+      <div className="container">
+        <Title />
+        <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={this.handleCurrencyChange} convertChange={this.currencyChangeConvertTo} baseChange={this.currencyChangeBase} currencyExchangeCalculator={this.currencyExchangeCalculator} />
+        <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />
+        <Route path="/ChanceDestination" render={()=> <ChanceDestination currencyRates={rates.currencyRates} baseValue={conversion.baseValue} />} />
+      </div>
+    )
+
+}
+
+<Chart />
+<Graph />
+<ChanceDestination />
+<Converter /> 
+
+
+        return (
+            <div>
+            {(() => {
+                return currencyRates.map((currency) => {
+                    for(const key in currency) {
+                       return <div key={key} >{key} at {currency[key]}</div>
+                    }
+                })
+            })()}
+            </div>
+        )
+
+
+*/

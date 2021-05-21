@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 
 import {Footer, Navi} from "./Nav.js"
-import Home from "./Home.js"
-import Portfolio from './Portfolio.js'
+import Dashboard from "./Dashboard.js"
+import Home from "./Converter.js"
+
 
 class App extends React.Component  {
   constructor(props) {
@@ -25,10 +26,7 @@ class App extends React.Component  {
     return (
       <Router>
         <Navi screenWidth={this.state.screenWidth} />
-        <Switch>
-          <Route path="/portfolio" component={Portfolio} />
-          <Route path="/" component={Home} />
-        </Switch>
+          <Dashboard  screenWidth={this.state.screenWidth} />
         <Footer />
       </Router>
     )
