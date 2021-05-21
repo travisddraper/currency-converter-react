@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 
 import {json, checkStatus } from './utils.js'
 
@@ -67,8 +67,8 @@ class Dashboard extends React.Component {
         let goingRate = 0;
         let newRates = [];
         const newSelections = {...this.state.selections, base: data.base }
-        //let base = document.getElementById('base')
-        //let conversion = document.getElementById('convertTo')
+        let base = document.getElementById('base')
+        let conversion = document.getElementById('convertTo')
         
         for (const property in data.rates) {
           if(this.state.selections.convertTo === property) {
@@ -85,9 +85,9 @@ class Dashboard extends React.Component {
           selections: newSelections,
         })
         
-        /*if(conversion.value) {
+        if(conversion.value) {
           conversion.value = (base.value * goingRate).toFixed(2)
-        }*/
+        }
         
     }
 
@@ -120,28 +120,43 @@ class Dashboard extends React.Component {
         const {screenWidth } = this.props
         const {rates} = this.state
         const currencyRates = rates.currencyRates;
-        console.log(this.state);
+
         return (
             <>
             {screenWidth >= 768 
                 ? <>
-                    <Route path="/chart" render={() => {
-                        <Page>
-                            <Chart />
+                    <Route path="/chart" render={() => 
+                        <Page 
+                            stateProps={this.state} 
+                            handleCurrencyChange={this.handleCurrencyChange}
+                            currencyChangeBase={this.currencyChangeBase}  
+                            currencyChangeConvertTo={this.currencyChangeConvertTo}
+                        >
+                            <Chart stateProps={this.state} />
                         </Page>
-                    }}
+                    }
                     />
-                    <Route path="/graph" render={() => {
-                        <Page>
-                            <Chart />
+                    <Route path="/graph" render={() => 
+                        <Page 
+                            stateProps={this.state} 
+                            handleCurrencyChange={this.handleCurrencyChange}
+                            currencyChangeBase={this.currencyChangeBase}  
+                            currencyChangeConvertTo={this.currencyChangeConvertTo}
+                        >
+                            <Graph stateProps={this.state} />
                         </Page>
-                    }}
+                    }
                     />
-                    <Route path="/destination" render={() => {
-                        <Page>
-                            <ChanceDestination />
+                    <Route path="/destination" render={() => 
+                        <Page 
+                            stateProps={this.state} 
+                            handleCurrencyChange={this.handleCurrencyChange}
+                            currencyChangeBase={this.currencyChangeBase}  
+                            currencyChangeConvertTo={this.currencyChangeConvertTo}
+                        >
+                            <ChanceDestination stateProps={this.state} />
                         </Page>
-                    }}
+                    }
                     />
                     <Route path="/portfolio" component={Portfolio}
                     />
@@ -162,10 +177,15 @@ class Dashboard extends React.Component {
                  </>
                 :
                     <Layout>
-                        <Chart />
+                        <Converter
+                            stateProps={this.state} 
+                            handleCurrencyChange={this.handleCurrencyChange}
+                            currencyChangeBase={this.currencyChangeBase}  
+                            currencyChangeConvertTo={this.currencyChangeConvertTo} 
+                        /> 
+                        <Chart stateProps={this.state} />
                         <Graph />
-                        <ChanceDestination />
-                        <Converter /> 
+                        <ChanceDestination stateProps={this.state} />
                     </Layout>
             }
             </>

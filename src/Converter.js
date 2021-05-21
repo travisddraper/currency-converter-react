@@ -97,7 +97,7 @@ const CurrencyForm = (props) => {
 const ConverterBox = (props) => {
 
   const { selections, rates, baseChange, convertChange, handleCurrencyChange, conversion } = props;
-
+  
   return (
     <div className="currencyCoverter box">
       <div className="innerBox">
@@ -124,10 +124,11 @@ function Converter(props) {
 
     const { selections, rates, conversion } = props.stateProps
     const { handleCurrencyChange, currencyChangeBase, currencyChangeConvertTo } = props;
-    const wrong = false;
+
+
     return (
       <div className="container">
-        <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={currencyChangeConvertTo} baseChange={currencyChangeBase} currencyExchangeCalculator={currencyExchangeCalculator} />
+        <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={currencyChangeConvertTo} baseChange={currencyChangeBase} />
       </div>
     )
 

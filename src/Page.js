@@ -1,8 +1,19 @@
 import React from 'react';
+import Converter from './Converter.js'
 
-export default function Page() {
+
+export default function Page(props) {
+    const { handleCurrencyChange, currencyChangeBase, currencyChangeConvertTo, stateProps } = props
 
     return (
-        <div>Page!</div>
+        <div>
+            <Converter
+                stateProps={stateProps}
+                handleCurrencyChange={handleCurrencyChange} 
+                currencyChangeConvertTo={currencyChangeConvertTo} 
+                currencyChangeBase={currencyChangeBase}
+            />
+            {props.children}
+        </div>
     )
 }
