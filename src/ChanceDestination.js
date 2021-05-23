@@ -46,13 +46,15 @@ function ChanceDestinations(props) {
   const { baseValue } = conversion;
 
   const locations = randomLocation(currencyRates, baseValue)
-  
   return (
     <div id="destinations" className="functionContainer">
     <Title location="title destinationTitle" />
     <div className="chanceDestination">
       <div className="destinationRow row box2">
-        <div className="col-1 col-md-2 col-lg-3 col-xl-4 v1"></div>
+        { window.innerWidth <= 768 
+        ? <div className="col-1 col-md-2 col-lg-3 col-xl-4 v1"></div>
+        : null
+        }
         <div className="col-11 col-md-10 col-lg-9 col-xl-8 info row">
           {(() => {
             if(baseValue === '') {
