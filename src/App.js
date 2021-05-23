@@ -22,7 +22,7 @@ class App extends React.Component  {
   }
 
   render() {
-;
+    console.log(this.state.screenWidth);
     return (
       <Router>
         <Navi screenWidth={this.state.screenWidth} />

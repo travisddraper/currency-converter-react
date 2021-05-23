@@ -158,17 +158,24 @@ class Dashboard extends React.Component {
                     <Route path="/portfolio" component={Portfolio}
                     />
                     <Route exact path="/" render={() => 
-                        <Layout>
-                            <Converter 
+                        <Layout 
+                            converter={<Converter 
                                 stateProps={this.state} 
                                 handleCurrencyChange={this.handleCurrencyChange}
                                 currencyChangeBase={this.currencyChangeBase}  
                                 currencyChangeConvertTo={this.currencyChangeConvertTo}
-                            /> 
-                            <Chart stateProps={this.state} />
-                            <Graph />
-                            <ChanceDestination stateProps={this.state} />
-                        </Layout>
+                                />
+                            }
+                            chart={
+                                <Chart stateProps={this.state} />
+                            } 
+                            graph={
+                                <Graph />
+                            }
+                            destination={
+                                <ChanceDestination stateProps={this.state} />
+                            } 
+                        />
                         }
                     />
                  </>

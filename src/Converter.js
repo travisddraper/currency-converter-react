@@ -99,8 +99,7 @@ const ConverterBox = (props) => {
   const { selections, rates, baseChange, convertChange, handleCurrencyChange, conversion } = props;
   
   return (
-    <div className="currencyCoverter box">
-      <div className="innerBox">
+    <div className="currencyConverter">
         <div className="row currencyRow">
           <button className="topLeftButton">
             <Link to="/">Currency Converter</Link>
@@ -113,7 +112,6 @@ const ConverterBox = (props) => {
           </button>
         </div>
         <CurrencyForm selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={convertChange} baseChange={baseChange} />
-      </div>
     </div>
   )
 }
@@ -127,7 +125,7 @@ function Converter(props) {
 
 
     return (
-      <div className="container">
+      <div className="functionContainer">
         <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={currencyChangeConvertTo} baseChange={currencyChangeBase} />
       </div>
     )

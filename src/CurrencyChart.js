@@ -34,9 +34,10 @@ function Chart(props) {
   const { baseValue } = conversion
 
   return (
-    <div className="currencyChart">
+    <div className="functionContainer">
+      <h1 className="chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
+      <div className="currencyChart">
       <div className="table">
-        <h1 className="chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
         <HeadRow />
         <div id="chartValues">
           {(() => {
@@ -52,6 +53,9 @@ function Chart(props) {
         </div>
       </div>
     </div>
+
+    </div>
+
   )
 }
 

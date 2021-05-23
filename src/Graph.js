@@ -4,6 +4,6 @@ export default function Graph(props) {
 
 
     return (
-        <div>Graph!</div>
+        <div className="functionContainer">Graph!</div>
     )
 }
