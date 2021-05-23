@@ -25,9 +25,12 @@ class App extends React.Component  {
     console.log(this.state.screenWidth);
     return (
       <Router>
-        <Navi screenWidth={this.state.screenWidth} />
+        <div id="background">
+          <Navi screenWidth={this.state.screenWidth} />
           <Dashboard  screenWidth={this.state.screenWidth} />
-        <Footer />
+          <Footer />
+        </div>
+       
       </Router>
     )
   }

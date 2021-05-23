@@ -25,22 +25,29 @@ button:focus {
 
 /* -------------- BACKGROUND ---------- */
 
+#background {
 
-
-.container {
-  background-color: red;
+  min-height: 100%;
   min-height: 100vh;
-  max-width: 90vw !important;
-  
-  /*
   background-image: url('./images/travel_background.jpg');
   background-repeat: no-repeat;
   background-size:cover;
   background-position: center;
   background-attachment: fixed; 
-  min-height: 100vh;
+  overflow: auto;
+}
+
+.container {
+  margin-top: 75px;
   padding-bottom: 50px;
-  */
+  max-width: 90vw !important;
+  background-color: rgba(250, 250, 250, 0.5);
+  border-radius: 10%;
+
+  
+
+
+  
 }
 
 
@@ -63,7 +70,7 @@ button:focus {
 /* SIDEBAR NAVIGATION STYLINGS --- */
 
 .sidebar {
-  background-color: rgba(91, 135, 153, 0.5);
+  background-color: rgba(91, 135, 153, 1);
   height: 100vh;
   position: fixed;
   top: 0;
@@ -264,37 +271,48 @@ button:focus {
 }
 
 .layoutBox {
-  background-color: rgba(0, 0, 255, 1);
+  background-color: rgba(91, 135, 153, 0.5);
   padding: 10px;
   border-radius: 20px;
   max-height: 500px;
-  
+  box-shadow: 2px 2px 5px black;
+
 }
 
 .converterBox {
-  margin-top: 100px;
-  margin-bottom: 250px;
+  margin-top: 80px;
+  margin-bottom: 200px;
 }
 
 .functionContainer {
   width: 100%;
   height: 100%;
   border-radius: 5%;
-  background-color: green;
+  background-color: rgba(250, 250, 250, 0.5);
   overflow-y:scroll;
 }
 
+.title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  white-space: nowrap;
+}
 
-/* ------------ CONVERTER.JS --------------- */
 
 
-/* ------------ HOME.js ------------------- */
+/* ------------ CONVERTER.js ------------------- */
+#converter {
+  overflow-y:visible;
+}
+
+.converterTitle {
+  top: -70px;
+}
 
 .currencyConverter {
-  margin-top: 1px;
-  box-shadow: 2px 2px 5px black;
   border-radius: 15px;
-  background-color: rgba(250, 250, 250, 0.5);
   padding: 0 10px 10px 10px;
   margin-left: 5px;
   margin-right: 5px;
@@ -395,15 +413,11 @@ button:focus {
 /* ------------ CURRENCY CHART ------------ */
 
 .chartTitle {
-  text-align: center;
   color: white;
   text-shadow: 2px 2px grey;
   font-size: 42px !important;
   font-weight:400;
-  position: absolute;
   top: -70px;
-  z-index: 1000000000000;
-  left: 0;
 }
 
 .currencyChartChoice,
@@ -470,20 +484,23 @@ button:focus {
 
 
 
+/* --------------GRAPH.JS------------------------ */
+.graphTitle {
+  position: absolute;
+  top: -70px;
+}
+
 /* ------------- CHANCEDESTINATION.JS ---------- */
 
 
 .destinationTitle {
+  display: block !important;
   position: absolute;
   top: -90px;
-  left: 0;
   color: white;
   text-shadow: 2px 2px grey;
   font-size: 35px !important;
   font-weight:400;
-}
-.destinationRow {
-  margin-top: 50px;
 }
 
 .v1 {
@@ -549,22 +566,18 @@ button:focus {
   color: red;
 }
 
-*/
+
 
 /* ------------ FOOTER NAVIGATION -------- */
-
 #socialMediaFooter {
   position: fixed;
-}
-
-#socialMediaFooter a {
-  color: white;
+  display: flex;
 }
 
 @media(min-width: 768px) {
   #socialMediaFooter {
-    bottom: 15px;
-    right: 15px;
+    bottom: 0;
+    right: 0;
   }
 }
 

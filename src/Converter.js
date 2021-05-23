@@ -125,7 +125,8 @@ function Converter(props) {
 
 
     return (
-      <div className="functionContainer">
+      <div id="converter" className="functionContainer">
+        <h1 className="title converterTitle">Currency Conversion</h1>
         <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} convertChange={currencyChangeConvertTo} baseChange={currencyChangeBase} />
       </div>
     )

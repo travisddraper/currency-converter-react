@@ -48,8 +48,8 @@ function ChanceDestinations(props) {
   const locations = randomLocation(currencyRates, baseValue)
   
   return (
-    <div className="functionContainer">
-    <Title location="destinationTitle" />
+    <div id="destinations" className="functionContainer">
+    <Title location="title destinationTitle" />
     <div className="chanceDestination">
       <div className="destinationRow row box2">
         <div className="col-1 col-md-2 col-lg-3 col-xl-4 v1"></div>
