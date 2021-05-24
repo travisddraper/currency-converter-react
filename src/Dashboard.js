@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link, Switch } from "react-router-dom";
-
+import { MDBIcon } from "mdbreact";
 
 import {json, checkStatus } from './utils.js'
 
@@ -10,6 +10,29 @@ import Portfolio from './Portfolio.js'
 import Layout from './Layout.js'
 import Graph from './Graph.js'
 import Converter from './Converter.js'
+
+import {currencyTracker} from './utils.js'
+import _ from 'underscore';
+
+function randomLocation(currencyRates, baseValue) {
+  return _.sample(currencyRates, 3).map((destination) => {
+    for(const key in destination) {
+      let money = (destination[key] * baseValue).toFixed(2);
+      let temp = key;
+      for(const name in currencyTracker) {
+        if(name === key) {
+          temp = currencyTracker[name]
+          break;
+        }
+      }
+      return {
+        currency: key,
+        location: temp,
+        money: money,
+      }
+    }
+  })
+}
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -105,19 +128,22 @@ class Dashboard extends React.Component {
 
   // FIX YOUR FETCH REQUEST SO THAT IT DOESN'T FETCH WHEN THE CONVERTTO CURRENCY CHANGES, BUT THEN NECESSARY STATE PROPS DO
   componentDidUpdate(prevProps, prevState) {
-      if (prevState.selections.base !== this.state.selections.base || prevState.selections.convertTo !== this.state.selections.convertTo) {
-        fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.state.selections.base}`)
-        .then(checkStatus)
-        .then(json)
-        .then((data) => {
-          this.currencyUpdate(data);
-        })
-      }
+    if (prevState.selections.base !== this.state.selections.base || prevState.selections.convertTo !== this.state.selections.convertTo) {
+      fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.state.selections.base}`)
+      .then(checkStatus)
+      .then(json)
+      .then((data) => {
+        this.currencyUpdate(data);
+      })
+    }
   }
 
   render() {
+    const locations = randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue)
+
     return (
       <>
+      <div id="websiteTitle">Travel Money   <span  className="exclamation"><MDBIcon icon="exclamation" /></span></div>
         <Route path="/portfolio" component={Portfolio} />
         <Route exact path="/" render={() => 
             <Layout
@@ -134,7 +160,7 @@ class Dashboard extends React.Component {
                   <Graph />
                 }
                 destination={
-                  <ChanceDestination stateProps={this.state} />
+                  <ChanceDestination baseValue={this.state.conversion.baseValue} locations={locations} />
                 } 
             />
             }

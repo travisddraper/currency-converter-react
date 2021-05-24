@@ -19,7 +19,7 @@ const DropdownCurrency = (props) => {
 
   return (
     <DropdownButton 
-      id="currencyButton" 
+      className="currencyButton" 
       variant="Secondary"
       size="sm"
       title={title}   
@@ -87,7 +87,7 @@ const CurrencyForm = (props) => {
     <form className="row formRow px-2">
       <ConversionSection title={base} rateNames={rateNames} conversion={conversion.baseValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} currencyChange={currencyChange} direction="base" />
       <div className="col-12 col-sm-1 mt-sm-2 mt-md-0 conversionArrow arrow">
-        <MDBIcon  icon="angle-right" size="2x" />
+        <MDBIcon  icon="angle-right" size="4x" />
       </div>
       <ConversionSection title={convertTo} rateNames={rateNames} conversion={conversion.convertToValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} currencyChange={currencyChange}  direction="convertTo" />
     </form>
@@ -100,17 +100,6 @@ const ConverterBox = (props) => {
   
   return (
     <div className="currencyConverter">
-        <div className="row currencyRow">
-          <button className="topLeftButton">
-            <Link to="/">Currency Converter</Link>
-          </button>
-          <button className="middleButton">
-            <Link to="/chart">Currency Chart</Link>
-          </button>
-          <button className="topRightButton">
-            <Link to="/ChanceDestination">Chance Destinations</Link>
-          </button>
-        </div>
         <CurrencyForm selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} currencyChange={currencyChange} />
     </div>
   )
@@ -126,7 +115,7 @@ function Converter(props) {
 
     return (
       <div id="converter" className="functionContainer">
-        <h1 className="title converterTitle">Currency Conversion</h1>
+        <h1 className="title converterTitle"><span className="fontColorChoice">Currency</span> Conversion</h1>
         <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={handleCurrencyChange} currencyChange={currencyChange} />
       </div>
     )

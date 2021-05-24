@@ -16,11 +16,10 @@ function SideNav(props) {
                 <button id="sidebarToggle" data-toggle-sidebar="sidebar1" aria-label="sidebar" rotate={navBar} className="toggleTest" onClick={handleNav} >
                     <MDBIcon icon="arrow-right" size="2x" />
                 </button>
-                <h1 className="navTitle">Travel Money</h1>
-                <hr className="sideBarBreak" />
+                <h1 className="navTitle">Travel Money <MDBIcon icon="exclamation" /></h1>
                 <div className="sidebarRow row">
                     <div className="linkCol">
-                        <a className="navLink" href="#topTag">Dashboard</a>
+                        <Link className="navLink" to="/">Dashboard</Link>
                     </div>
                     <div className="linkCol">
                         <a className="navLink" href="#chartTag">Conversion Chart</a>
@@ -101,6 +100,10 @@ export function Footer() {
             <a href="#instagram" className="mx-2">
                 <MDBIcon fab icon="instagram" size="2x" />
             </a>
+            <a href="#github" className="mx-2">
+            <MDBIcon fab icon="github"  size="2x" />
+            </a>
+            
         </div>
     )
 }

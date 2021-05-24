@@ -1,30 +1,10 @@
 import React from 'react';
 import { MDBIcon } from "mdbreact";
-import {currencyTracker} from './utils.js'
 import getSymbolFromCurrency from 'currency-symbol-map'
-import _ from 'underscore';
 
-function randomLocation(currencyRates, baseValue) {
-  return _.sample(currencyRates, 3).map((destination) => {
-    for(const key in destination) {
-      let money = (destination[key] * baseValue).toFixed(2);
-      let temp = key;
-      for(const name in currencyTracker) {
-        if(name === key) {
-          temp = currencyTracker[name]
-          break;
-        }
-      }
-      return {
-        currency: key,
-        location: temp,
-        money: money,
-      }
-    }
-  })
-}
 
-const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span style={{color: "red"}}>Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>
+
+const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span className="fontColorChoice">Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>
 
 const Destination = (props) => {
   const {destination, money, currency } = props
@@ -41,11 +21,8 @@ const Destination = (props) => {
 
 function ChanceDestinations(props) {
 
-  const {rates, conversion } = props.stateProps;
-  const { currencyRates } = rates;
-  const { baseValue } = conversion;
+  const {locations, baseValue} = props
 
-  const locations = randomLocation(currencyRates, baseValue)
   return (
     <div id="destinations" className="functionContainer">
     <Title location="title destinationTitle" />
