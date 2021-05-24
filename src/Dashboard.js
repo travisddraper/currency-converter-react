@@ -151,7 +151,7 @@ class Dashboard extends React.Component {
 
   render() {
     const locations = randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue)
-    console.log(this.state);
+
     return (
       <>
       <div id="websiteTitle">Travel Money   <span  className="exclamation"><MDBIcon icon="exclamation" /></span></div>
