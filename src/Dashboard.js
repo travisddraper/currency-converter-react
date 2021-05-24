@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Link, Switch } from "react-router-dom";
 
+
 import {json, checkStatus } from './utils.js'
 
 import Chart from './CurrencyChart.js'
 import ChanceDestination from './ChanceDestination.js'
 import Portfolio from './Portfolio.js'
 import Layout from './Layout.js'
-import Page from './Page.js'
 import Graph from './Graph.js'
 import Converter from './Converter.js'
 
@@ -117,81 +117,30 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const {screenWidth } = this.props
         return (
             <>
-            {screenWidth >= 768 
-                ? <>
-                    <Route path="/chart" render={() => 
-                        <Page 
-                            stateProps={this.state} 
-                            handleCurrencyChange={this.handleCurrencyChange}
-                            currencyChangeBase={this.currencyChangeBase}  
-                            currencyChangeConvertTo={this.currencyChangeConvertTo}
-                        >
-                            <Chart stateProps={this.state} />
-                        </Page>
-                    }
-                    />
-                    <Route path="/graph" render={() => 
-                        <Page 
-                            stateProps={this.state} 
-                            handleCurrencyChange={this.handleCurrencyChange}
-                            currencyChangeBase={this.currencyChangeBase}  
-                            currencyChangeConvertTo={this.currencyChangeConvertTo}
-                        >
-                            <Graph stateProps={this.state} />
-                        </Page>
-                    }
-                    />
-                    <Route path="/destination" render={() => 
-                        <Page 
-                            stateProps={this.state} 
-                            handleCurrencyChange={this.handleCurrencyChange}
-                            currencyChangeBase={this.currencyChangeBase}  
-                            currencyChangeConvertTo={this.currencyChangeConvertTo}
-                        >
-                            <ChanceDestination stateProps={this.state} />
-                        </Page>
-                    }
-                    />
-                    <Route path="/portfolio" component={Portfolio}
-                    />
-                    <Route exact path="/" render={() => 
-                        <Layout 
-                            converter={<Converter 
-                                stateProps={this.state} 
-                                handleCurrencyChange={this.handleCurrencyChange}
-                                currencyChangeBase={this.currencyChangeBase}  
-                                currencyChangeConvertTo={this.currencyChangeConvertTo}
-                                />
-                            }
-                            chart={
-                                <Chart stateProps={this.state} />
-                            } 
-                            graph={
-                                <Graph />
-                            }
-                            destination={
-                                <ChanceDestination stateProps={this.state} />
-                            } 
+            <Route path="/portfolio" component={Portfolio} />
+            <Route exact path="/" render={() => 
+                <Layout
+                    converter={<Converter 
+                        stateProps={this.state} 
+                        handleCurrencyChange={this.handleCurrencyChange}
+                        currencyChangeBase={this.currencyChangeBase}  
+                        currencyChangeConvertTo={this.currencyChangeConvertTo}
                         />
-                        }
-                    />
-                 </>
-                :
-                    <Layout>
-                        <Converter
-                            stateProps={this.state} 
-                            handleCurrencyChange={this.handleCurrencyChange}
-                            currencyChangeBase={this.currencyChangeBase}  
-                            currencyChangeConvertTo={this.currencyChangeConvertTo} 
-                        /> 
+                    }
+                    chart={
                         <Chart stateProps={this.state} />
+                    } 
+                    graph={
                         <Graph />
+                    }
+                    destination={
                         <ChanceDestination stateProps={this.state} />
-                    </Layout>
-            }
+                    } 
+                />
+                }
+            />
             </>
         )
     }

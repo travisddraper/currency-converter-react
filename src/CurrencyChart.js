@@ -7,7 +7,7 @@ const DataRow = (props) => {
   const price = (baseValue, rate) => ( (baseValue * rate).toLocaleString() )
 
   return (
-    <div className="row tableRow dataRow">
+    <div className="row tableRow dataRow py-2">
       <div className="data dataCurrency col-4">{currency}</div>
       <div className="data dataRate col-4">{rate}</div>
       <div className="data dataAmount col-4">{price(baseValue, rate)}<span className="currencySymbol"> {getSymbolFromCurrency(currency)}</span></div>
@@ -37,9 +37,9 @@ function Chart(props) {
     <div id="chart" className="functionContainer">
       <h1 className="title chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
       <div className="currencyChart">
+      <HeadRow />
       <div className="table">
-        <HeadRow />
-        <div id="chartValues">
+        <div id="chartValues" className="pt-2">
           {(() => {
             return currencyRates.map((currency) => {
               let cur, rate;

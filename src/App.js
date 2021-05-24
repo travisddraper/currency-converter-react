@@ -11,23 +11,30 @@ class App extends React.Component  {
   constructor(props) {
     super(props)
     this.state = {
-      screenWidth: window.innerWidth,
+      screenWidth: '',
     }
   }
 
   componentDidMount() {
+    this.setState({ screenWidth: window.innerWidth >= 768 ? true : false })
+
     window.addEventListener('resize', () => {
-      this.setState({ screenWidth: window.innerWidth})
+      if(window.innerWidth >= 768 && !this.state.screenWidth) {
+        this.setState({ screenWidth: true })
+      } else if (window.innerWidth < 768 && this.state.screenWidth) {
+        this.setState ({ screenWidth: false })
+      }
     })
   }
 
+
   render() {
-    console.log(this.state.screenWidth);
+
     return (
       <Router>
         <div id="background">
-          <Navi screenWidth={this.state.screenWidth} />
-          <Dashboard  screenWidth={this.state.screenWidth} />
+          <Navi screenWidth={this.state.screenWidth}  />
+          <Dashboard />
           <Footer />
         </div>
        

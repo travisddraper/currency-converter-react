@@ -33,7 +33,7 @@ const Destination = (props) => {
     <div className="destination col-4">
       <MDBIcon className="d-inline mb-3 pr-2 arrow" icon="angle-right" />
       <p>
-        Travel to <a className="travel" href={`https://en.wikipedia.org/wiki/${destination}`} rel="noreferrer" target="_blank">{destination.replace(/_/g, ' ')}</a> and have {(parseInt(money)).toLocaleString()}<span className="travel">{getSymbolFromCurrency(currency)}</span>!
+        Travel to <a className="travel" href={`https://en.wikipedia.org/wiki/${destination}`} rel="noreferrer" target="_blank">{destination.replace(/_/g, ' ')}</a> with {(parseInt(money)).toLocaleString()}<span className="travel">{getSymbolFromCurrency(currency)}</span>!
       </p>
     </div>
   )
@@ -55,7 +55,7 @@ function ChanceDestinations(props) {
         ? <div className="col-1 col-md-2 col-lg-3 col-xl-4 v1"></div>
         : null
         }
-        <div className="col-11 col-md-10 col-lg-9 col-xl-8 info row">
+        <div className="col-11 col-md-10 col-lg-9 col-xl-12 info row">
           {(() => {
             if(baseValue === '') {
               return <div className="destination warning">Add some cash above, and let's check out those travel locations!</div>

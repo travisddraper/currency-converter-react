@@ -20,16 +20,16 @@ function SideNav(props) {
                 <hr className="sideBarBreak" />
                 <div className="sidebarRow row">
                     <div className="linkCol">
-                        <Link className="navLink" to="/">Dashboard</Link>
+                        <a className="navLink" href="#topTag">Dashboard</a>
                     </div>
                     <div className="linkCol">
-                        <Link className="navLink" to="/chart">Conversion Chart</Link>
+                        <a className="navLink" href="#chartTag">Conversion Chart</a>
                     </div>
                     <div className="linkCol">
-                        <Link className="navLink" to="/graph">Conversion Graph</Link>
+                        <a className="navLink" href="#graphTag">Conversion Graph</a>
                     </div>
                     <div className="linkCol">
-                        <Link className="navLink" to="/destination">Chance Destinations</Link>
+                        <a className="navLink" href="#destinationsTag">Chance Destinations</a>
                     </div>
                     <div className="linkCol">
                         <Link className="navLink" to="/portfolio">Portfolio</Link>
@@ -78,7 +78,7 @@ export class Navi extends React.Component {
         const navBar = this.state.navBar;
         return (
             <>
-            {screenWidth >= 768 
+            {screenWidth 
                 ? <SideNav navBar={navBar} handleNav={this.handleNav} />
                 : <SmallNav />
             }
