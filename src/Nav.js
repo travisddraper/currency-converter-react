@@ -44,14 +44,14 @@ function SmallNav() {
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="#topTag">Travel Money</Navbar.Brand>
+            <Link id="homeButton" to="/">Travel Money</Link>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="#graphTag">Conversion Graph</Nav.Link>
                         <Nav.Link href="#chartTag">Conversion Chart</Nav.Link>
                         <Nav.Link href="#destinationsTag">Chance Destinations</Nav.Link>
-                        <Nav.Link href="/portfolio">Portfolio</Nav.Link>
+                        <Link id="portfolioLink" to="/portfolio">Portfolio</Link>
                     </Nav>
                 </Navbar.Collapse>
         </Navbar>

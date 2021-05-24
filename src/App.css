@@ -177,6 +177,23 @@ button:focus {
 }
 
 /*Bottom Navbar Stylings */
+#homeButton {
+  display: inline-block;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  color: white;
+}
+
+#portfolioLink {
+  color: rgba(255, 255, 255, .5);
+  display: block;
+  padding: .5rem 0;
+}
+
 .navLink {
   padding-left: 10px;
   color: white;
