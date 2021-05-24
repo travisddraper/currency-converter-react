@@ -136,20 +136,3 @@ function Converter(props) {
 
 
 export default Converter
-
-/*<Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />*/
-
-/*
-        <Route
-          path ="/chart"
-          component={
-            wrong 
-            ? () => <div className="container">
-                      <div>it was true</div>
-                    </div>
-            : () => <div className="container 2">
-                      <div>It was false!</div>
-                    </div>
-          } 
-        />
-*/

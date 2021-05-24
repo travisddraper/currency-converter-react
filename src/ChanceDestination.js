@@ -58,7 +58,7 @@ function ChanceDestinations(props) {
         <div className="col-11 col-md-10 col-lg-9 col-xl-12 info row">
           {(() => {
             if(baseValue === '') {
-              return <div className="destination warning">Add some cash above, and let's check out those travel locations!</div>
+              return <div className="warning">Add some cash above, and let's check out those travel locations!</div>
             }
             return locations.map((travel) => {
               return <Destination key={travel.location} destination={travel.location} money={travel.money} currency={travel.currency} />

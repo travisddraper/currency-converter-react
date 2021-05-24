@@ -36,22 +36,29 @@ function Chart(props) {
   return (
     <div id="chart" className="functionContainer">
       <h1 className="title chartTitle">Convert <span className="currencyChartChoice">{base}</span> to ...</h1>
-      <div className="currencyChart">
-      <HeadRow />
-      <div className="table">
-        <div id="chartValues" className="pt-2">
-          {(() => {
-            return currencyRates.map((currency) => {
-              let cur, rate;
-              for(const key in currency) {
-                cur = key;
-                rate = currency[key];
-              }
-              return <DataRow key={cur} currency={cur} rate={rate} baseValue={baseValue} />
-            })
-          })()}
+      <div className="currencyChart">  
+        {baseValue == '' 
+        ? <div className="warning">Add some cash above, and let's check out those conversions!</div> 
+        :
+        <>
+        <HeadRow /> 
+        <div className="table">
+          <div id="chartValues" className="pt-2">
+            {(() => {
+              return currencyRates.map((currency) => {
+                let cur, rate;
+                for(const key in currency) {
+                  cur = key;
+                  rate = currency[key];
+                }
+                return <DataRow key={cur} currency={cur} rate={rate} baseValue={baseValue} />
+              })
+            })()}
+          </div>
         </div>
-      </div>
+        </>
+        }
+
     </div>
 
     </div>
