@@ -47,7 +47,6 @@ const ConversionSection = (props) => {
           id={direction}
           type="number"
           onChange={currencyChange}
-          value={conversion}
           className="ml-2 ml-sm-0"
         >  
         </input>
@@ -60,7 +59,6 @@ const ConversionSection = (props) => {
           id={direction}
           type="number"
           onChange={currencyChange}
-          value={conversion}
           className="mr-2 mr-sm-0"
         >  
         </input>

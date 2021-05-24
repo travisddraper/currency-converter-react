@@ -13,6 +13,7 @@ import Converter from './Converter.js'
 
 import {currencyTracker} from './utils.js'
 import _ from 'underscore';
+import {debounce, throttle} from 'underscore';
 
 function randomLocation(currencyRates, baseValue) {
   return _.sample(currencyRates, 3).map((destination) => {
@@ -55,6 +56,7 @@ class Dashboard extends React.Component {
 
       this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
       this.currencyChange = this.currencyChange.bind(this);
+      this.throttleCurrencyChange= debounce(this.throttleCurrencyChange.bind(this), 1000)
   }
 
   handleCurrencyChange(conversion, currency) {
@@ -65,23 +67,32 @@ class Dashboard extends React.Component {
       this.setState({ selections: newSelections })
   }
   
+
+  throttleCurrencyChange(direction, newConversion) {
+    if(direction === "base") {
+      this.setState({ conversion: newConversion })
+    } else {
+      this.setState({ conversion: newConversion })
+    }
+  }
+
   currencyChange(event) {
     if(event.target.id == 'base') {
       const convertValue = (event.target.value * (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
-      this.setState({ 
-        conversion: {
-          baseValue: event.target.value,
-          convertToValue: convertValue, 
-        }
-      })
+      document.getElementById('convertTo').value = convertValue;
+      const newConversion = {
+        baseValue: event.target.value,
+        convertToValue: convertValue,
+      }
+      this.throttleCurrencyChange('base', newConversion)
     } else {
       const convertValue = (event.target.value / (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
-      this.setState({ 
-        conversion: {
-          baseValue: convertValue,
-          convertToValue: event.target.value, 
-        }
-      })
+      document.getElementById('base').value = convertValue;
+      const newConversion = {
+        baseValue: convertValue,
+        convertToValue: event.target.value,
+      }
+      this.throttleCurrencyChange('convertTo', newConversion)
     }
   }
 
@@ -140,7 +151,7 @@ class Dashboard extends React.Component {
 
   render() {
     const locations = randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue)
-
+    console.log(this.state);
     return (
       <>
       <div id="websiteTitle">Travel Money   <span  className="exclamation"><MDBIcon icon="exclamation" /></span></div>
