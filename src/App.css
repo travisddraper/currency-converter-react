@@ -34,8 +34,12 @@ button:focus {
   left: 0;
   right: 0;
   background-image: url('./images/travel_background.jpg');
-  background-size:cover;
-  background-position: center;
+  background-position:left;
+}
+@media(max-width: 1199px) {
+  #background {
+    background-position: center;
+  }
 }
 
 .container {
