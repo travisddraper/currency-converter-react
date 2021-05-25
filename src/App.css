@@ -30,10 +30,12 @@ button:focus {
 #background {
   position:fixed;
   top: 0;
-  bottom: 0;
+  bottom: -350px;
   left: 0;
   right: 0;
   background-image: url('./images/travel_background.jpg');
+  background-repeat: no-repeat;
+  background-size:cover;
   background-position:left;
 }
 @media(max-width: 1199px) {
