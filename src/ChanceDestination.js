@@ -41,7 +41,7 @@ class ChanceDestinations extends React.Component {
             for(const key in wikiObject) {
               let div = document.createElement("div");
               div.append(wikiObject[key].extract)
-              document.getElementsByClassName('destination')[0].append(div);
+              //document.getElementsByClassName('destination')[0].append(div);
             }
           })
           .catch((error) => {

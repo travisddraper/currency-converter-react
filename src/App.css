@@ -601,15 +601,7 @@ button:focus {
   font-weight: 500;
 }
 
-.warning {
-  width: 100%;
-  text-align: center;
-  margin-top: 100px !important;
-  font-size: 1.25rem;
-  font-weight: 500;
-  align-items: center;
-  left: 15px;
-}
+
 
 @media(max-width: 767px) {
  
@@ -633,6 +625,15 @@ button:focus {
   margin-left: 0 !important;
 }
 
+.warning {
+  width: 100%;
+  text-align: center;
+  margin-top: 100px !important;
+  font-size: 1.25rem;
+  font-weight: 500;
+  align-items: center;
+  left: 15px;
+}
 
 
 /* ------------ FOOTER NAVIGATION -------- */

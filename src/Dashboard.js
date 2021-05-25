@@ -123,7 +123,6 @@ class Dashboard extends React.Component {
       if(conversion.value) {
         conversion.value = (base.value * goingRate).toFixed(2)
       }
-      
       return randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue)
         
   }
@@ -139,19 +138,6 @@ class Dashboard extends React.Component {
         this.setState({ error: error.message });
         console.log(error);
       })
-   
-      fetch("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Stack%20Overflow&origin=*")
-      .then(checkStatus)
-      .then(json)
-      .then((data) => {
-        let something = data.query.pages
-        for(const key in something) {
-          //console.log(something[key].extract)
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   }
 
   // FIX YOUR FETCH REQUEST SO THAT IT DOESN'T FETCH WHEN THE CONVERTTO CURRENCY CHANGES, BUT THEN NECESSARY STATE PROPS DO
@@ -161,7 +147,7 @@ class Dashboard extends React.Component {
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        this.setState({ locations: this.currencyUpdate(data) });
+        this.currencyUpdate(data);
       })
     }
   }
