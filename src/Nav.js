@@ -17,7 +17,7 @@ function SideNav(props) {
                     <MDBIcon icon="arrow-right" size="2x" />
                 </button>
                 <h1 className="navTitle">Travel Money</h1>
-                <div className="sidebarRow row">
+                <div className="sidebarRow px-2 row">
                     <div className="linkCol">
                         <Link className="navLink" to="/">Dashboard</Link>
                     </div>

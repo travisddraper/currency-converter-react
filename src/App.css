@@ -194,7 +194,6 @@ button:focus {
   justify-content:space-around;
   text-align: center;
   padding-bottom: 200px;
-  padding-right: 5px;
 }
 @media(max-height: 500px) {
   .sidebarRow {
