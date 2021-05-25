@@ -32,6 +32,20 @@ function SideNav(props) {
                     </div>
                     <div className="linkCol">
                         <Link className="navLink" to="/portfolio">Portfolio</Link>
+                    </div>
+                    <div className="socialMediaFooter d-flex">
+                            <a href="#twitter" className="mx-2">
+                                <MDBIcon fab icon="twitter" className="footerIcon"  />
+                            </a>
+                            <a href="#facebook" className="mx-2">
+                                <MDBIcon fab icon="facebook" className="footerIcon"  />
+                            </a>
+                            <a href="#instagram" className="mx-2">
+                                <MDBIcon fab icon="instagram" className="footerIcon" />
+                            </a>
+                            <a href="#github" className="mx-2">
+                                <MDBIcon fab icon="github"  className="footerIcon"  />
+                            </a>
                     </div>             
                 </div>
             </div>
@@ -51,6 +65,20 @@ function SmallNav() {
                         <Nav.Link href="#graphTag">Conversion Graph</Nav.Link>
                         <Nav.Link href="#destinationsTag">Chance Destinations</Nav.Link>
                         <Link id="portfolioLink" to="/portfolio">Portfolio</Link>
+                        <div className="socialMediaFooter d-flex">
+                            <a href="#twitter" className="mx-2">
+                                <MDBIcon fab icon="twitter" className="footerIcon"  />
+                            </a>
+                            <a href="#facebook" className="mx-2">
+                                <MDBIcon fab icon="facebook" className="footerIcon"  />
+                            </a>
+                            <a href="#instagram" className="mx-2">
+                                <MDBIcon fab icon="instagram" className="footerIcon" />
+                            </a>
+                            <a href="#github" className="mx-2">
+                                <MDBIcon fab icon="github"  className="footerIcon"  />
+                            </a>
+                        </div>
                     </Nav>
                 </Navbar.Collapse>
         </Navbar>

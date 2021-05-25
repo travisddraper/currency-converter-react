@@ -30,12 +30,11 @@ button:focus {
 #background {
   position:fixed;
   top: 0;
-  bottom: -350px;
+  bottom: -40px;
   left: 0;
   right: 0;
   background-image: url('./images/travel_background.jpg');
   background-repeat: no-repeat;
-  background-size:cover;
   background-position:left;
 }
 @media(max-width: 1199px) {
@@ -115,8 +114,8 @@ button:focus {
   z-index: 10;
   transition: 300ms;
   transform: translateX(-95%);
-  border-top-right-radius: 20%;
-  border-bottom-right-radius: 20%;
+  border-top-right-radius: 18%;
+  border-bottom-right-radius: 18%;
 }
 
 @media(min-width: 1200px) {
@@ -195,6 +194,16 @@ button:focus {
   justify-content:space-around;
   text-align: center;
   padding-bottom: 200px;
+  padding-right: 5px;
+}
+@media(max-height: 500px) {
+  .sidebarRow {
+    font-size: 10px !important;
+    padding-bottom: 130px;
+  }
+  .sidebarRow a {
+    font-size: 10px !important;
+  }
 }
 
 /*Bottom Navbar Stylings */
@@ -233,6 +242,14 @@ button:focus {
 }
 .navbar-collapse {
   width: 0px !important;
+}
+
+.socialMediaFooter {
+  padding-top: 10px;
+  justify-content: space-evenly;
+}
+.socialMediaFooter a {
+  color: white;
 }
 
 /* ------------ PORTFOLIO.JS --------------- */
@@ -721,6 +738,11 @@ button:focus {
   #socialMediaFooter {
     bottom: 15px;
     right: 15px;
+  }
+}
+@media(max-width: 1199px) {
+  #socialMediaFooter {
+    display: none;
   }
 }
 
