@@ -53,25 +53,6 @@ button:focus {
   }
 }
 
-#websiteTitle {
-  display: none;
-}
-.exclamation {
-  color:rgba(126, 76, 12, 0.5);
-}
-
-@media(min-width:1200px) {
-  #websiteTitle {
-    display: block;
-    font-size: 2rem;
-    position: fixed;
-    bottom: 15px;
-    left: 15px;
-    font-weight: 600;
-    color: rgba(250,250,250,1);
-  }
-}
-
 
 #blackOverlay{
   display: none;
@@ -82,7 +63,6 @@ button:focus {
   left: 0;
   z-index: 50;
   background-color: rgba(0, 0, 0, 0.7);
-
 }
 
 
@@ -98,6 +78,18 @@ button:focus {
   }
   100% {
     transform: translateX(0px);
+    opacity: 100%;
+  }
+}
+
+@keyframes opacity-in {
+  0% {
+    opacity: 0%;
+  }
+  99% {
+    opacity: 0%;
+  }
+  100% {
     opacity: 100%;
   }
 }
@@ -318,6 +310,7 @@ button:focus {
 /* -------------LAYOUT.JS ------------------ */
 .layoutRow {
   justify-content: space-evenly;
+ 
 }
 
 .layoutBox {
@@ -327,6 +320,7 @@ button:focus {
   max-height: 500px;
   box-shadow: 2px 2px 5px black;
   position: relative;
+
 }
 
 .layoutBox[expanded="true"] {
@@ -336,13 +330,13 @@ button:focus {
   left: 23%;
   z-index: 100;
   height: 80%;
-  max-height: 100% !important;
+  max-height: 80% !important;
   width: 50%;
-  max-width: 100% !important;
+  max-width: 50% !important;
+  transition: 300ms
 }
 
 .converterBox {
-  background-color:rgba(91, 119, 79, 1);
   margin-top: 120px;
   margin-bottom: 200px;
 
@@ -630,13 +624,6 @@ button:focus {
   top: -100px;
 }
 
-.travelBlurb {
-  display: block;
-  max-height: 100%;
-  overflow: hidden;
-  padding: 0px 30px 20px 40px;
-}
-
 .ellipsis {
   font-weight: bold;
   line-height: 25px;
@@ -652,11 +639,15 @@ button:focus {
 .destination {
   padding-left: 5px;
 }
+
 .travelHeader {
   padding-top: 15px;
   padding-left: 10px;
   font-size: 1.25rem;
   font-weight: 500;
+}
+.layoutBox[expanded="true"] .travelHeader {
+  font-size: 30px;
 }
 
 .layoutBox[expanded="false"] .travelBlurb {
@@ -681,20 +672,42 @@ button:focus {
 }
 .layoutBox[expanded="true"] .destinationRow {
   padding-left: 15px;
+  opacity: 0%;
+  animation-name: opacity-in;
+  animation-duration: 1ms;
+  animation-delay: 300ms;
+  animation-fill-mode: forwards;
 }
 .layoutBox[expanded="true"] .warning {
   margin-top: 228px;
 }
 
+
+.travelBlurb {
+  display: block;
+  max-height: 100%;
+  overflow: hidden;
+  padding: 20px 30px 20px 40px;
+  margin: 10px;
+  margin-right: 50px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px black;
+  font-style:italic;
+  background-color: white;
+}
+
 @media(max-width: 1199px) {
+  .travelBlurb {
+    display:block!important;
+    background-color: rgba(250,250,250,0.5);
+    box-shadow:none;
+    padding-top: 0px;
+  }
   .layoutBox {
     margin-top: 150px;
     margin-bottom: 100px;
   }
 
-  .travelBlurb {
-    display: block !important;
-  }
   .arrow {
     display:inline-block !important;
   }
@@ -754,4 +767,15 @@ button:focus {
   }
 }
 
-
+.soloCheckActive {
+  margin-top: 400px;
+  transition: 300ms;
+}
+@media(max-width: 400px) {
+  .soloCheckActive {
+    margin-top: 300px;
+  }
+}
+.soloCheckInactive {
+  transition: 300ms;
+}

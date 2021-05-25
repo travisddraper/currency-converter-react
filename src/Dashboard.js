@@ -156,10 +156,9 @@ class Dashboard extends React.Component {
 
     return (
       <>
-      <div id="websiteTitle">Travel Money</div>
         <Route path="/portfolio" component={Portfolio} />
         <Route exact path="/" render={() => 
-            <Layout
+            <Layout baseValue={this.state.conversion.baseValue}
                 converter={<Converter 
                     stateProps={this.state} 
                     handleCurrencyChange={this.handleCurrencyChange}
