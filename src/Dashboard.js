@@ -52,6 +52,7 @@ class Dashboard extends React.Component {
               baseValue: '',
               convertToValue: '',
           },
+          locations: [],
       }
 
       this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
@@ -74,6 +75,7 @@ class Dashboard extends React.Component {
     } else {
       this.setState({ conversion: newConversion })
     }
+    this.setState({ locations: randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue) });
   }
 
   currencyChange(event) {
@@ -121,6 +123,8 @@ class Dashboard extends React.Component {
       if(conversion.value) {
         conversion.value = (base.value * goingRate).toFixed(2)
       }
+      
+      return randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue)
         
   }
 
@@ -129,11 +133,24 @@ class Dashboard extends React.Component {
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        this.currencyUpdate(data);
+        this.setState({ locations: this.currencyUpdate(data) });
       })
       .catch((error) => {
         this.setState({ error: error.message });
         console.log(error);
+      })
+   
+      fetch("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Stack%20Overflow&origin=*")
+      .then(checkStatus)
+      .then(json)
+      .then((data) => {
+        let something = data.query.pages
+        for(const key in something) {
+          //console.log(something[key].extract)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
       })
   }
 
@@ -144,13 +161,12 @@ class Dashboard extends React.Component {
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        this.currencyUpdate(data);
+        this.setState({ locations: this.currencyUpdate(data) });
       })
     }
   }
 
   render() {
-    const locations = randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue)
 
     return (
       <>
@@ -171,7 +187,7 @@ class Dashboard extends React.Component {
                   <Graph />
                 }
                 destination={
-                  <ChanceDestination baseValue={this.state.conversion.baseValue} locations={locations} />
+                  <ChanceDestination baseValue={this.state.conversion.baseValue} locations={this.state.locations}/>
                 } 
             />
             }
