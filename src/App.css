@@ -182,12 +182,6 @@ button:focus {
   font-weight: 500;
 }
 
-.sideBarBreak {
-  height: 1px;
-  border-radius: 100%;
-  background-color: red;
-}
-
 .sidebarRow {
   height: 100%;
   flex-direction: column;
@@ -207,7 +201,22 @@ button:focus {
 
 /*Bottom Navbar Stylings */
 .bg-dark {
+  background-color: transparent !important;
+  box-shadow: none;
+}
+#responsive-navbar-nav {
   background-color: rgba(58, 90, 137, 1) !important;
+  padding: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  border-radius: 0 0 20px 20px;
+}
+.navbar-toggler {
+  background-color: rgba(58, 90, 137, 1) !important;
+  padding: 5px !important;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  z-index: 5;
 }
 #homeButton {
   display: inline-block;
