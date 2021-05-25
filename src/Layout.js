@@ -44,17 +44,17 @@ export default class Layout extends React.Component {
                     <div className="layoutBox converterBox col-10 col-xl-10">
                         {this.props.converter}
                     </div> 
-                    <div className="layoutBox chartBox mt-5 mb-5 mt-xl-0 mb-xl-0 col-10 col-xl-3" expanded="false">
+                    <div className="layoutBox chartBox  col-10 col-xl-3" expanded="false">
                         <a id="chartTag"></a>
                         <MDBIcon icon="expand" type="button" className="expander" />
                         {this.props.chart}
                     </div>
-                    <div className="layoutBox graphBox mt-5 mb-5 mt-xl-0 mb-xl-0  col-10 col-xl-3" expanded="false">
+                    <div className="layoutBox graphBox col-10 col-xl-3" expanded="false">
                         <a id="graphTag"></a>
                         <MDBIcon icon="expand" type="button" className="expander" />
                         {this.props.graph}
                     </div>
-                    <div className="layoutBox destinationBox mt-5 mb-5 mt-xl-0 mb-xl-0  col-10 col-xl-3" expanded="false">
+                    <div className="layoutBox destinationBox col-10 col-xl-3" expanded="false">
                         <a id="destinationsTag"></a>
                         <MDBIcon icon="expand" type="button" className="expander" />
                         {this.props.destination}

@@ -42,7 +42,7 @@ function Chart(props) {
         :
         <>
         <HeadRow /> 
-        <div className="table">
+        <div className="table-responsive">
           <div id="chartValues" className="pt-2">
             {(() => {
               return currencyRates.map((currency) => {

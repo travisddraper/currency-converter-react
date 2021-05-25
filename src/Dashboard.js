@@ -156,7 +156,7 @@ class Dashboard extends React.Component {
 
     return (
       <>
-      <div id="websiteTitle">Travel Money   <span  className="exclamation"><MDBIcon icon="exclamation" /></span></div>
+      <div id="websiteTitle">Travel Money</div>
         <Route path="/portfolio" component={Portfolio} />
         <Route exact path="/" render={() => 
             <Layout

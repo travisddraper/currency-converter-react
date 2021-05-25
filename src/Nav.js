@@ -16,7 +16,7 @@ function SideNav(props) {
                 <button id="sidebarToggle" data-toggle-sidebar="sidebar1" aria-label="sidebar" rotate={navBar} className="toggleTest" onClick={handleNav} >
                     <MDBIcon icon="arrow-right" size="2x" />
                 </button>
-                <h1 className="navTitle">Travel Money <MDBIcon icon="exclamation" /></h1>
+                <h1 className="navTitle">Travel Money</h1>
                 <div className="sidebarRow row">
                     <div className="linkCol">
                         <Link className="navLink" to="/">Dashboard</Link>
@@ -47,8 +47,8 @@ function SmallNav() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#graphTag">Conversion Graph</Nav.Link>
                         <Nav.Link href="#chartTag">Conversion Chart</Nav.Link>
+                        <Nav.Link href="#graphTag">Conversion Graph</Nav.Link>
                         <Nav.Link href="#destinationsTag">Chance Destinations</Nav.Link>
                         <Link id="portfolioLink" to="/portfolio">Portfolio</Link>
                     </Nav>
@@ -92,16 +92,16 @@ export function Footer() {
     return (
         <div id="socialMediaFooter">
             <a href="#twitter" className="mx-2">
-                <MDBIcon fab icon="twitter" size="2x" />
+                <MDBIcon fab icon="twitter" className="footerIcon"  />
             </a>
             <a href="#facebook" className="mx-2">
-                <MDBIcon fab icon="facebook" size="2x" />
+                <MDBIcon fab icon="facebook" className="footerIcon"  />
             </a>
             <a href="#instagram" className="mx-2">
-                <MDBIcon fab icon="instagram" size="2x" />
+                <MDBIcon fab icon="instagram" className="footerIcon" />
             </a>
             <a href="#github" className="mx-2">
-            <MDBIcon fab icon="github"  size="2x" />
+            <MDBIcon fab icon="github"  className="footerIcon"  />
             </a>
             
         </div>

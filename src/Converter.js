@@ -85,7 +85,7 @@ const CurrencyForm = (props) => {
     <form className="row formRow px-2">
       <ConversionSection title={base} rateNames={rateNames} conversion={conversion.baseValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} currencyChange={currencyChange} direction="base" />
       <div className="col-12 col-sm-1 mt-sm-2 mt-md-0 conversionArrow arrow">
-        <MDBIcon  icon="angle-right" size="4x" />
+        <MDBIcon  icon="angle-right" className="converterArrow"/>
       </div>
       <ConversionSection title={convertTo} rateNames={rateNames} conversion={conversion.convertToValue} goingRate={rates.goingRate} onChange={handleCurrencyChange} currencyChange={currencyChange}  direction="convertTo" />
     </form>
