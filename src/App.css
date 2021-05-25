@@ -196,6 +196,9 @@ button:focus {
 }
 
 /*Bottom Navbar Stylings */
+.bg-dark {
+  background-color: rgba(7, 119, 163, 1) !important;
+}
 #homeButton {
   display: inline-block;
   padding-top: .3125rem;
@@ -222,7 +225,7 @@ button:focus {
 
 .navbar {
   position: fixed;
-  bottom: 0;
+  top: 0;
   right: 0;
   z-index: 10;
 }
@@ -703,7 +706,9 @@ button:focus {
 }
 #socialMediaFooter {
   position: fixed;
-  display: flex;
+  display: flex;    
+  bottom: 15px;
+  right: 15px;
 }
 
 #socialMediaFooter a {
@@ -717,12 +722,4 @@ button:focus {
   }
 }
 
-@media(max-width: 767px) {
-  #socialMediaFooter {
-    display: flex;
-    bottom: 0;
-    left: 0;
-    padding-bottom: 0.5rem;
-  }
-}
 
