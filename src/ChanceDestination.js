@@ -6,7 +6,7 @@ import { text } from '@fortawesome/fontawesome-svg-core';
 
 
 
-const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span className="fontColorChoice">Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>
+const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span className="fontColorChoice px-2">Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>
 //col-11 col-md-10 col-lg-9 col-xl-12
 const Destination = (props) => {
   const {destination, money, currency } = props
