@@ -62,10 +62,9 @@ button:focus {
     top: 0;
     right: 0;
     font-weight: 600;
-    color:rgba(7, 119, 163, 1);
+    color: white;
     padding: 10px;
-    border-radius: 20px 0 0 20px;
-    background-color: rgba(250, 250, 250, 0.9);
+    background-color: rgba(0,0,0,0.5);
   }
 }
 
@@ -144,7 +143,7 @@ button:focus {
   .sidebar:not([aria-hidden]),
   .sidebar[aria-hidden="false"] {
     transition: 300ms;
-    transform: translateX(0);
+    transform: translateX(-9%);
   }
   #sidebarToggle[rotate="false"] {
     transition: 500ms;
@@ -158,7 +157,7 @@ button:focus {
   }
   .sidebar:hover {
     transition: 300ms;
-    transform: translateX(0);
+    transform: translateX(-9%);
   }
   .sidebar:hover #sidebarToggle {
     display: none;
@@ -336,6 +335,21 @@ button:focus {
   font-weight: 500;
   color: rgba(7, 119, 163, 1) !important;
 }
+@media(max-width: 1450px) {
+  .title {
+    font-size: 30px;
+  }
+}
+@media(max-width: 1199px) {
+  .title {
+    font-size: 40px;
+  }
+}
+@media(max-width: 500px) {
+  .title {
+    font-size: 30px;
+  }
+}
 
 .layoutBox[expanded="true"] .title {
   padding: 10px;
@@ -437,7 +451,12 @@ button:focus {
   width: 60%;
   font-size: 25px;
 }
-
+@media(max-width: 396px) {
+  #convertTo,
+  #base {
+  width: 50%;
+}
+}
 .conversion {
   display: flex;
   justify-content: space-between;
@@ -503,7 +522,6 @@ button:focus {
 /* ------------ CURRENCY CHART ------------ */
 
 .chartTitle {
-  font-size: 42px !important;
   top: -70px;
 }
 
@@ -514,29 +532,19 @@ button:focus {
 @media(max-width: 991px) {
 
   .chartTitle{
-    font-size: 60px !important;
     top: -65px;
     left: 0;
   }
 }
 @media(max-width: 767px) {
   .chartTitle{
-    font-size: 45px !important;
     top: -60px;
-    left: 0;
   }
 }
 @media(max-width: 575px) {
-  .chartTitle{
-    font-size: 30px !important;
-    top: -60px;
-    left: 0;
-  }
-
   .dataAmount {
     white-space: nowrap;
   }
-
 }
 
 .currencyChart {
@@ -588,14 +596,7 @@ button:focus {
 .destinationTitle {
   display: block !important;
   position: absolute;
-  top: -90px;
-  font-size: 35px !important;
-}
-@media(max-width: 991px) {
-  .destinationTitle {
-   font-size: 35px !important;
-   padding-left: 20px;
-  }
+  top: -100px;
 }
 
 .travelBlurb {
@@ -653,7 +654,7 @@ button:focus {
 
 @media(max-width: 1199px) {
   .layoutBox {
-    margin-top: 100px;
+    margin-top: 150px;
     margin-bottom: 100px;
   }
 
@@ -667,59 +668,18 @@ button:focus {
     flex-direction: row !important;
     text-align:start !important;
   }
-  .title {
-    top: -90px;
+}
+@media(max-width: 550px) {
+  .travelBlurb {
+    display: none !important;
+  }
+  .destinationRow {
+    flex-direction: column !important;
+  }
+  .arrow {
+    display: none !important;
   }
 }
-
-/*
-.destinationRow {
-  width: 100%;
-  height: 100%;
-}
-.v1 {
-  border-right: 6px solid skyblue;
-  height: 500px;
-}
-
-.info {
-  flex-direction: column;
-}
-
-
-.destination {
-  display: flex;
-  padding-left: 50px;
-  text-align: left;
-  max-width: 100%;
-  align-items: center;
-  font-size: 25px;
-  font-weight: 500;
-}
-
-
-
-@media(max-width: 767px) {
- 
-  .v1 {
-    display: none;
-  }
-}
-
-.arrow {
-  color: rgba(7, 119, 163, 1);
-}
-
-
-
-.layoutBox[expanded="false"] .destinationRow {
-  margin-left: 0 !important;
-}
-.layoutBox[expanded="false"] .info {
-  margin-left: 0 !important;
-}
-
-*/
 
 /* ------------ FOOTER NAVIGATION -------- */
 @media(min-width:1200px) {
