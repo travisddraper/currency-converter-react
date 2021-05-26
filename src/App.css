@@ -255,18 +255,23 @@ button:focus {
 /* ------------ PORTFOLIO.JS --------------- */
 
 .portfolio {
-  margin-top: 50px;
+  position: relative;
+  margin-top: 100px;
 }
+
 
 .bioPicture img {
   box-shadow: 2px 2px 5px black;
+  max-height: 800px;
 }
 
 .bio {
   display: flex;
   align-items: flex-start;
 }
-
+.bio p {
+  margin-top: 50px;
+}
 .bio p {
   font-weight: 400;
   padding: 15px;
@@ -279,7 +284,7 @@ button:focus {
   .portfolio {
     flex-direction: column;
     align-items: center;
-    background-color: rgba(250, 250, 250, 0.5);
+    background-color: rgba(250, 250, 250, 1) !important;
     box-shadow: 2px 2px 5px black;
     border-radius: 15px;
   }
@@ -300,11 +305,20 @@ button:focus {
 
 @media (max-width: 575px) {
   .portfolio {
+    margin-top: 200px;
     margin-left: 15px;
     margin-right: 15px;
   }
 }
 
+@media(max-width: 1199px) {
+  .portfolioFooter {
+    display: flex !important;
+  }
+  .portfolioFooter a {
+    font-size: 1.5em;
+  }
+}
 
 
 /* -------------LAYOUT.JS ------------------ */
@@ -771,7 +785,7 @@ button:focus {
   margin-top: 400px;
   transition: 300ms;
 }
-@media(max-width: 400px) {
+@media(max-width: 500px) {
   .soloCheckActive {
     margin-top: 300px;
   }

@@ -20,11 +20,22 @@ export default class Layout extends React.Component {
         }
     }
 
+    componentDidMount() {
+        document.getElementById('base').value=this.props.baseValue;
+        document.getElementById('convertTo').value=this.props.convertToValue;
+
+        let expanders = document.getElementsByClassName('expander');
+        Array.from(expanders).forEach((element) => {
+            element.addEventListener('click', this.expanderFunction)
+        })
+    }
+
     componentDidUpdate() {
         let expanders = document.getElementsByClassName('expander');
         Array.from(expanders).forEach((element) => {
             element.addEventListener('click', this.expanderFunction)
         })
+
     }
 
     componentWillUnmount() {
@@ -72,17 +83,3 @@ export default class Layout extends React.Component {
         )
     }
 }
-
-/*
-
-    componentDidUpdate() {
-        let expanders = document.getElementsByClassName('expander');
-        Array.from(expanders).forEach((element) => {
-            if(this.props.expanders) {
-                element.addEventListener('click', this.expanderFunction)
-            } else {
-                element.removeEventListener('click', this.expanderFunction);
-            }
-        })
-    }
-    */

@@ -1,5 +1,6 @@
 import React from "react";
 import FakeProfile from './images/profile.jpeg';
+import { Footer } from './Nav.js'
 
 
 
@@ -18,6 +19,7 @@ function Portfolio() {
                     </p>
                 </div>
             </div>
+            <Footer location="portfolioFooter" />
         </div>
     )
 

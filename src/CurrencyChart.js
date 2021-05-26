@@ -10,7 +10,7 @@ const DataRow = (props) => {
     <div className="row tableRow dataRow py-2">
       <div className="data dataCurrency col-4">{currency}</div>
       <div className="data dataRate col-4">{rate}</div>
-      <div className="data dataAmount col-4">{price(baseValue, rate)}<span className="currencySymbol"> {getSymbolFromCurrency(currency)}</span></div>
+      <div className="data dataAmount col-4"><span className="currencySymbol pr-1"> {getSymbolFromCurrency(currency)}</span>{price(baseValue, rate)}</div>
     </div>
     )
 }

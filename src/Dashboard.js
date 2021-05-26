@@ -138,6 +138,7 @@ class Dashboard extends React.Component {
         this.setState({ error: error.message });
         console.log(error);
       })
+
   }
 
   // FIX YOUR FETCH REQUEST SO THAT IT DOESN'T FETCH WHEN THE CONVERTTO CURRENCY CHANGES, BUT THEN NECESSARY STATE PROPS DO
@@ -158,7 +159,7 @@ class Dashboard extends React.Component {
       <>
         <Route path="/portfolio" component={Portfolio} />
         <Route exact path="/" render={() => 
-            <Layout baseValue={this.state.conversion.baseValue}
+            <Layout baseValue={this.state.conversion.baseValue} convertToValue={this.state.conversion.convertToValue} rate={this.state.rates.goingRate}
                 converter={<Converter 
                     stateProps={this.state} 
                     handleCurrencyChange={this.handleCurrencyChange}

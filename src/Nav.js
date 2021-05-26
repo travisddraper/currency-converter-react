@@ -115,10 +115,11 @@ export class Navi extends React.Component {
     }
 }
 
-export function Footer() {
+export function Footer(props) {
+   const {location} = props;
 
     return (
-        <div id="socialMediaFooter">
+        <div id="socialMediaFooter" className={location}>
             <a href="#twitter" className="mx-2">
                 <MDBIcon fab icon="twitter" className="footerIcon"  />
             </a>
