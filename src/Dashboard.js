@@ -140,7 +140,6 @@ class Dashboard extends React.Component {
 
   }
 
-  // FIX YOUR FETCH REQUEST SO THAT IT DOESN'T FETCH WHEN THE CONVERTTO CURRENCY CHANGES, BUT THEN NECESSARY STATE PROPS DO
   componentDidUpdate(prevProps, prevState) {
     if (prevState.selections.base !== this.state.selections.base || prevState.selections.convertTo !== this.state.selections.convertTo) {
       fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.state.selections.base}`)
@@ -183,40 +182,3 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard
-
-/*
-function Converter() {
-
-    const { selections, rates, conversion } = this.state
-    const wrong = false;
-    return (
-      <div className="container">
-        <Title />
-        <ConverterBox selections={selections} rates={rates} conversion={conversion} handleCurrencyChange={this.handleCurrencyChange} convertChange={this.currencyChangeConvertTo} baseChange={this.currencyChangeBase} currencyExchangeCalculator={this.currencyExchangeCalculator} />
-        <Route path="/chart"  render={() => <Chart base={selections.base} rates={rates} baseValue={conversion.baseValue} />} />
-        <Route path="/ChanceDestination" render={()=> <ChanceDestination currencyRates={rates.currencyRates} baseValue={conversion.baseValue} />} />
-      </div>
-    )
-
-}
-
-<Chart />
-<Graph />
-<ChanceDestination />
-<Converter /> 
-
-
-        return (
-            <div>
-            {(() => {
-                return currencyRates.map((currency) => {
-                    for(const key in currency) {
-                       return <div key={key} >{key} at {currency[key]}</div>
-                    }
-                })
-            })()}
-            </div>
-        )
-
-
-*/

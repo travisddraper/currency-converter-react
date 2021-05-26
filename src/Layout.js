@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBIcon } from "mdbreact";
-
+import {Link} from "react-router-dom";
 
 export default class Layout extends React.Component {
     
@@ -47,6 +47,9 @@ export default class Layout extends React.Component {
         const soloCheck = baseValue? 'soloCheckInactive' : 'soloCheckActive';
         return (
             <div className="container">
+                <div className="specialLinks">
+                    <Link to="/portfolio">Portfolio</Link>
+                </div>
                 <a id="topTag"></a>
                 <div id="blackOverlay"></div>
                 <div className="layoutRow row">

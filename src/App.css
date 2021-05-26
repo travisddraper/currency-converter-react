@@ -254,6 +254,21 @@ button:focus {
 
 /* ------------ PORTFOLIO.JS --------------- */
 
+.specialLinks {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+}
+.specialLinks a {
+  color: white;
+  font-size: 2rem;
+}
+@media(max-width: 1199px) {
+  .specialLinks {
+    display: none;
+  }
+}
+
 .portfolio {
   position: relative;
   margin-top: 100px;

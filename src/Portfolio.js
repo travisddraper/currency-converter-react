@@ -1,6 +1,7 @@
 import React from "react";
 import FakeProfile from './images/profile.jpeg';
 import { Footer } from './Nav.js'
+import { Link } from "react-router-dom";
 
 
 
@@ -9,6 +10,9 @@ function Portfolio() {
 
     return (
         <div className="container">
+            <div className="specialLinks">
+                <Link to="/">Dashboard</Link>
+            </div>
             <div className="portfolio row">
                 <div className="bioPicture col-8 col-md-5">
                     <img className="img-fluid" src={FakeProfile} alt="Profile of designer" />

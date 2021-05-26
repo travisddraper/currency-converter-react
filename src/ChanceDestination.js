@@ -24,42 +24,38 @@ const Destination = (props) => {
 }
 
 class ChanceDestinations extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      info: [],
-    }
+
+  fetchBlurbs() {
+    const destinations = this.props.locations
+    const reg = /\(listen\)/g
+    destinations.forEach((location) => {
+      let locationName = location.location;
+      fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${locationName.replace(" ", "%20")}&origin=*`)
+      .then(checkStatus)
+      .then(json)
+      .then((data) => {
+        let wikiObject = data.query.pages
+
+        for(const key in wikiObject) {
+          let textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ');
+          document.getElementById(locationName).innerHTML=(textBlurb + '<span class="ellipsis">. . .</span>')
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    })
   }
 
-    componentDidMount() {
-      console.log(this.props.locations);
+  componentDidMount() {
+    this.fetchBlurbs();
+  }
+
+  componentDidUpdate() {
+    if(this.props.baseValue){
+      this.fetchBlurbs();
     }
-
-    componentDidUpdate() {
-      if(this.props.baseValue){
-        const destinations = this.props.locations
-        const reg = /\(listen\)/g
-        destinations.forEach((location) => {
-          let locationName = location.location;
-          fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${locationName.replace(" ", "%20")}&origin=*`)
-          .then(checkStatus)
-          .then(json)
-          .then((data) => {
-            let wikiObject = data.query.pages
-
-            for(const key in wikiObject) {
-              let textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ');
-              document.getElementById(locationName).innerHTML=(textBlurb + '<span class="ellipsis">. . .</span>')
-            }
-          })
-          .catch((error) => {
-            //console.log('locationName', document.getElementById(locationName));
-            console.log(error)
-          })
-        })
-      }
-
-    }
+  }
       
 
   render() {
@@ -78,10 +74,8 @@ class ChanceDestinations extends React.Component {
             })()}
         </div>
       </div>
-  
     )
   }
-
 }
 
 export default ChanceDestinations;
