@@ -701,11 +701,8 @@ button:focus {
 }
 .layoutBox[expanded="true"] .destinationRow {
   padding-left: 15px;
-  opacity: 0%;
   animation-name: opacity-in;
-  animation-duration: 1ms;
-  animation-delay: 300ms;
-  animation-fill-mode: forwards;
+  animation-duration: 300ms;
 }
 .layoutBox[expanded="true"] .warning {
   margin-top: 228px;
