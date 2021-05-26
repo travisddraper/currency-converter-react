@@ -1,10 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, } from "react-router-dom";
 import './App.css';
 
 import {Footer, Navi} from "./Nav.js"
 import Dashboard from "./Dashboard.js"
-import Home from "./Converter.js"
 
 
 class App extends React.Component  {

@@ -37,7 +37,7 @@ function Chart(props) {
     <div id="chart" className="functionContainer">
       <h1 className="title chartTitle">Convert <span className="fontColorChoice">{base}</span> to ...</h1>
       <div className="currencyChart">  
-        {baseValue == '' 
+        {baseValue === '' 
         ? <div className="warning">Add some cash above, and let's check out those conversions!</div> 
         :
         <>

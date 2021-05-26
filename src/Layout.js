@@ -3,9 +3,6 @@ import { MDBIcon } from "mdbreact";
 
 
 export default class Layout extends React.Component {
-    constructor(props) {
-        super(props)
-    }
     
     expanderFunction(event) {
         const boxExp = event.target.parentNode

@@ -96,7 +96,7 @@ export class Navi extends React.Component {
     }
 
     handleNav() {
-        this.setState({ navBar: this.state.navBar == 'false' ? 'true' : 'false' })
+        this.setState({ navBar: this.state.navBar === 'false' ? 'true' : 'false' })
         document.getElementById('sidebarToggle').setAttribute("transform", "rotate(180deg)")
     }
 

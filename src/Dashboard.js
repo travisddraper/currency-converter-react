@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Link, Switch } from "react-router-dom";
-import { MDBIcon } from "mdbreact";
+import { Route } from "react-router-dom";
 
 import {json, checkStatus } from './utils.js'
 
@@ -13,7 +12,7 @@ import Converter from './Converter.js'
 
 import {currencyTracker} from './utils.js'
 import _ from 'underscore';
-import {debounce, throttle} from 'underscore';
+import {debounce} from 'underscore';
 
 function randomLocation(currencyRates, baseValue) {
   return _.sample(currencyRates, 3).map((destination) => {
@@ -79,7 +78,7 @@ class Dashboard extends React.Component {
   }
 
   currencyChange(event) {
-    if(event.target.id == 'base') {
+    if(event.target.id === 'base') {
       const convertValue = (event.target.value * (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
       document.getElementById('convertTo').value = convertValue;
       const newConversion = {

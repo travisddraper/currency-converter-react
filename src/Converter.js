@@ -1,18 +1,8 @@
 import React from 'react';
-import { Route, Link } from "react-router-dom";
 
 import { MDBIcon } from "mdbreact";
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
-
-import {json, checkStatus } from './utils.js'
-
-import Chart from './CurrencyChart.js'
-import ChanceDestination from './ChanceDestination.js'
-
-
-const Title = () =>  <h1 id="pageTitle">Travel Money</h1> 
-
 
 const DropdownCurrency = (props) => {
   const {rateNames, onChange, direction, title} = props;
@@ -34,7 +24,7 @@ const DropdownCurrency = (props) => {
 }
 
 const ConversionSection = (props) => {
-  const {title, rateNames, onChange, direction, currencyChange, conversion } = props
+  const {title, rateNames, onChange, direction, currencyChange } = props
 
   return (
     <>

@@ -1,8 +1,6 @@
 import React from 'react';
 import { MDBIcon } from "mdbreact";
-import getSymbolFromCurrency from 'currency-symbol-map'
 import {json, checkStatus } from './utils.js'
-import { text } from '@fortawesome/fontawesome-svg-core';
 
 
 
@@ -32,31 +30,12 @@ class ChanceDestinations extends React.Component {
       info: [],
     }
   }
+
     componentDidMount() {
-        const destinations = this.props.locations
-        console.log(destinations);
-        const reg = /\(listen\)/g
-        destinations.forEach((location) => {
-          let locationName = location.location;
-          fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${locationName.replace(" ", "%20")}&origin=*`)
-          .then(checkStatus)
-          .then(json)
-          .then((data) => {
-            let wikiObject = data.query.pages
-            //this.setState({ info: 2 })
-            for(const key in wikiObject) {
-              let textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ');
-              console.log(textBlurb);
-              document.getElementById(locationName).innerHTML=(textBlurb + '<span class="ellipsis">. . .</span>')
-            }
-          })
-          .catch((error) => {
-            //console.log('locationName', document.getElementById(locationName));
-            console.log(error)
-          })
-        })
+      console.log(this.props.locations);
     }
-    /*componentDidUpdate(prevProps, prevState) {
+
+    componentDidUpdate() {
       if(this.props.baseValue){
         const destinations = this.props.locations
         const reg = /\(listen\)/g
@@ -67,7 +46,7 @@ class ChanceDestinations extends React.Component {
           .then(json)
           .then((data) => {
             let wikiObject = data.query.pages
-            //this.setState({ info: 2 })
+
             for(const key in wikiObject) {
               let textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ');
               document.getElementById(locationName).innerHTML=(textBlurb + '<span class="ellipsis">. . .</span>')
@@ -80,12 +59,11 @@ class ChanceDestinations extends React.Component {
         })
       }
 
-    }*/
+    }
       
 
   render() {
-    const {locations, baseValue} = this.props
-
+    const {locations, baseValue} = this.props;
     return (
       <div id="destinations" className="functionContainer">
       <Title location="title destinationTitle" />
