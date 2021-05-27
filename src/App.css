@@ -10,7 +10,7 @@ input::-webkit-inner-spin-button {
 .functionContainer::-webkit-scrollbar,
 .dropdown-menu::-webkit-scrollbar,
 .headRow::-webkit-scrollbar {
-  display: none;
+  display: none; 
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
