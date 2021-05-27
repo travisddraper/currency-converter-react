@@ -51,7 +51,7 @@ class ChanceDestinations extends React.Component {
     this.state = {
       destinations: {},
       locations: [],
-    }
+    } 
   }
 
   fetchBlurbs() {
