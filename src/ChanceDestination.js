@@ -4,7 +4,7 @@ import {json, checkStatus } from './utils.js'
 
 
 
-const Title = (props) => <h1 className={props.location}><span className="textRemove">Chance</span> <span className="fontColorChoice px-2">Destinations</span><br /> <span className="textRemove">with your Money!</span></h1>
+const Title = (props) => <h1 className="title destinationTitle"><span className="textRemove">Chance</span> <span className="fontColorChoice px-1">Destinations</span></h1>
 
 const Destination = (props) => {
   const {destination, money, currency } = props

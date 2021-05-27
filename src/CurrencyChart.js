@@ -2,12 +2,13 @@ import React from 'react';
 import getSymbolFromCurrency from 'currency-symbol-map'
 
 const DataRow = (props) => {
-  const{baseValue, currency, rate} = props
- 
+
+  const{baseValue, currency, rate, convertTo} = props;
   const price = (baseValue, rate) => ( (baseValue * rate).toLocaleString() )
+  const highlight = convertTo === currency ? 'highlight' : '';
 
   return (
-    <div className="row tableRow dataRow py-2">
+    <div className={`row tableRow dataRow py-2 ${highlight}`}>
       <div className="data dataCurrency col-4">{currency}</div>
       <div className="data dataRate col-4">{rate}</div>
       <div className="data dataAmount col-4"><span className="currencySymbol pr-1"> {getSymbolFromCurrency(currency)}</span>{price(baseValue, rate)}</div>
@@ -30,7 +31,7 @@ function Chart(props) {
 
   const { rates, selections, conversion } = props.stateProps
   const { currencyRates } = rates
-  const { base } = selections
+  const { base, convertTo } = selections
   const { baseValue } = conversion
 
   return (
@@ -51,7 +52,7 @@ function Chart(props) {
                   cur = key;
                   rate = currency[key];
                 }
-                return <DataRow key={cur} currency={cur} rate={rate} baseValue={baseValue} />
+                return <DataRow key={cur} convertTo={convertTo} currency={cur} rate={rate} baseValue={baseValue} />
               })
             })()}
           </div>
