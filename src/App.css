@@ -8,13 +8,15 @@ input::-webkit-inner-spin-button {
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .functionContainer::-webkit-scrollbar,
-.dropdown-menu::-webkit-scrollbar {
+.dropdown-menu::-webkit-scrollbar,
+.headRow::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .functionContainer,
-.dropdown-menu {
+.dropdown-menu,
+.headRow {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
@@ -164,10 +166,12 @@ button:focus {
   position: relative;
   height: 100%;
   padding: 8px;
+
 }
 
 .navTitle {
   padding-top: 10px;
+  margin-top: 30px;
   text-align:center;
   font-size: 40px !important;
   color: white;
@@ -175,6 +179,7 @@ button:focus {
 }
 
 .sidebarRow {
+  margin-top: 50px;
   height: 100%;
   flex-direction: column;
   justify-content:space-around;
@@ -539,25 +544,21 @@ button:focus {
     padding: 0;
   }
 }
-
-@media(min-width: 768px) {
-  .dropdown-toggle {
-    padding: 1rem 1.6rem !important;
-    background-color: white;
-    font-size: 15px !important;
-    font-weight: 500;
-  }
-}
-@media(max-width: 767px) {
-  .dropdown-toggle {
-    padding: 0.5rem 1rem !important;
-    background-color: white;
-    font-size: 15px !important;
-    font-weight: 500;
-  }
+.dropdown-toggle {
+  font-size: 1.25rem !important;
+  font-weight: 500 !important;
+  background-color: white;
 }
 
-
+@media(max-width: 1199px) {
+  .dropdown-toggle {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
 
 .dropdown-menu {
   height: 200px;
@@ -568,8 +569,12 @@ button:focus {
 .dropdown-toggle::after {
   margin-top: 5px !important;
 }
-
-
+.currencyButton {
+  text-align: center;
+  width: 45%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 /* ------------ CURRENCY CHART ------------ */
 
@@ -620,13 +625,16 @@ button:focus {
   position: sticky;
   top: 0;
   z-index: 2;
-
+  overflow: scroll;
 }
 
 .tableRow {
   justify-content:space-evenly;
-  text-align: center;
+  text-align: left;
   padding-bottom: 5px;
+  padding-top: 15px;
+  padding-left: 10px;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 

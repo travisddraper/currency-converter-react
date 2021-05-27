@@ -19,9 +19,9 @@ const DataRow = (props) => {
 const HeadRow = () => {
   return (
     <div className="row tableRow headRow">
-      <div className="data col-4">Currency</div>
-      <div className="data col-4">Exchange Rate</div>
-      <div className="data col-4">Amount</div>
+      <div className="data col-4 mx-2 mx-md-0">Currency</div>
+      <div className="data col-4 mx-2 mx-md-0">Exchange Rate</div>
+      <div className="data col-4 mx-2 mx-md-0">Amount</div>
     </div>
   )
 }
