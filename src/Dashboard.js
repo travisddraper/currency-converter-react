@@ -10,29 +10,9 @@ import Layout from './Layout.js'
 import Graph from './Graph.js'
 import Converter from './Converter.js'
 
-import {currencyTracker} from './utils.js'
+
 import _ from 'underscore';
 import {debounce} from 'underscore';
-
-function randomLocation(currencyRates, baseValue) {
-  return _.sample(currencyRates, 3).map((destination) => {
-    for(const key in destination) {
-      let money = (destination[key] * baseValue).toFixed(2);
-      let temp = key;
-      for(const name in currencyTracker) {
-        if(name === key) {
-          temp = currencyTracker[name]
-          break;
-        }
-      }
-      return {
-        currency: key,
-        location: temp,
-        money: money,
-      }
-    }
-  })
-}
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -74,7 +54,6 @@ class Dashboard extends React.Component {
     } else {
       this.setState({ conversion: newConversion })
     }
-    this.setState({ locations: randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue) });
   }
 
   currencyChange(event) {
@@ -122,7 +101,6 @@ class Dashboard extends React.Component {
       if(conversion.value) {
         conversion.value = (base.value * goingRate).toFixed(2)
       }
-      return randomLocation(this.state.rates.currencyRates, this.state.conversion.baseValue)
         
   }
 
@@ -131,7 +109,7 @@ class Dashboard extends React.Component {
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        this.setState({ locations: this.currencyUpdate(data) });
+        this.currencyUpdate(data);
       })
       .catch((error) => {
         this.setState({ error: error.message });
@@ -171,7 +149,7 @@ class Dashboard extends React.Component {
                   <Graph />
                 }
                 destination={
-                  <ChanceDestination baseValue={this.state.conversion.baseValue} locations={this.state.locations}/>
+                  <ChanceDestination baseValue={this.state.conversion.baseValue} rates={this.state.rates.currencyRates} />
                 } 
             />
             }

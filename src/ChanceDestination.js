@@ -1,13 +1,14 @@
 import React from 'react';
 import { MDBIcon } from "mdbreact";
 import {json, checkStatus } from './utils.js'
-
+import {currencyTracker} from './utils.js'
+import _ from 'underscore';
 
 
 const Title = (props) => <h1 className="title destinationTitle"><span className="textRemove">Chance</span> <span className="fontColorChoice px-1">Destinations</span></h1>
 
 const Destination = (props) => {
-  const {destination, money, currency } = props
+  const {destination, money, currency, text } = props
 
    return (
     <div className="info row">
@@ -17,29 +18,61 @@ const Destination = (props) => {
         <MDBIcon className="mb-3 pr-2 arrow" icon="angle-right" />
         Travel to <a className="travel" href={`https://en.wikipedia.org/wiki/${destination.replace(/ /, '_')}`} rel="noreferrer" target="_blank">{destination}</a> with {(parseInt(money)).toLocaleString()} <span className="travel">{currency}</span>!
       </p>
-      <div id={destination} className="travelBlurb"></div>
+      <div id={destination} className="travelBlurb">{text}</div>
     </div>
     </div>
   )
 }
 
+function randomLocation(currencyRates, baseValue) {
+  return _.sample(currencyRates, 3).map((destination) => {
+    for(const key in destination) {
+      let money = (destination[key] * baseValue).toFixed(2);
+      let temp = key;
+      for(const name in currencyTracker) {
+        if(name === key) {
+          temp = currencyTracker[name]
+          break;
+        }
+      }
+      return {
+        currency: key,
+        location: temp,
+        money: money,
+      }
+    }
+  })
+}
+
+
 class ChanceDestinations extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      destinations: {},
+      locations: [],
+    }
+  }
 
   fetchBlurbs() {
-    const destinations = this.props.locations
+    const locations = randomLocation( this.props.rates, this.props.baseValue )
     const reg = /\(listen\)/g
-    destinations.forEach((location) => {
+    const destinations = {};
+    locations.forEach((location) => {
       let locationName = location.location;
       fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${locationName.replace(" ", "%20")}&origin=*`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
-        let wikiObject = data.query.pages
-
+        const wikiObject = data.query.pages
         for(const key in wikiObject) {
-          let textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ');
-          document.getElementById(locationName).innerHTML=(textBlurb + '<span class="ellipsis">. . .</span>')
+          const textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ');
+          destinations[locationName] = textBlurb
         }
+        this.setState ({ 
+          locations: locations,
+          destinations: destinations,
+        })
       })
       .catch((error) => {
         console.log(error)
@@ -50,16 +83,16 @@ class ChanceDestinations extends React.Component {
   componentDidMount() {
     this.fetchBlurbs();
   }
-
-  componentDidUpdate() {
-    if(this.props.baseValue){
+  componentDidUpdate(prevProps) {
+    if(prevProps.baseValue !== this.props.baseValue){
       this.fetchBlurbs();
     }
   }
-      
-
+  
   render() {
-    const {locations, baseValue} = this.props;
+    const {baseValue} = this.props;
+    const {destinations} = this.state
+
     return (
       <div id="destinations" className="functionContainer">
       <Title location="title destinationTitle" />
@@ -68,8 +101,9 @@ class ChanceDestinations extends React.Component {
               if(baseValue === '') {
                 return <div className="warning warningFix">Add some cash above, and let's check out those travel locations!</div>
               }
-              return locations.map((travel) => {
-                return <Destination key={travel.location} destination={travel.location} money={travel.money} currency={travel.currency} />
+              return this.state.locations.map((travel) => {
+                const text = destinations[travel.location]
+                return <Destination text={text} key={travel.location} destination={travel.location} money={travel.money} currency={travel.currency} />
               })
             })()}
         </div>
