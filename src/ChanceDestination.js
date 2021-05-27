@@ -5,7 +5,7 @@ import {currencyTracker} from './utils.js'
 import _ from 'underscore';
 
 
-const Title = (props) => <h1 className="title destinationTitle"><span className="textRemove">Chance</span> <span className="fontColorChoice px-1">Destinations</span></h1>
+const Title = () => <h1 className="title destinationTitle"><span className="textRemove">Chance</span> <span className="fontColorChoice px-1">Destinations</span></h1>
 
 const Destination = (props) => {
   const {destination, money, currency, text } = props
@@ -90,22 +90,17 @@ class ChanceDestinations extends React.Component {
   }
   
   render() {
-    const {baseValue} = this.props;
     const {destinations} = this.state
 
     return (
       <div id="destinations" className="functionContainer">
       <Title location="title destinationTitle" />
         <div className="destinationRow row">
-            {(() => {
-              if(baseValue === '') {
-                return <div className="warning warningFix">Add some cash above, and let's check out those travel locations!</div>
-              }
-              return this.state.locations.map((travel) => {
+            {this.state.locations.map((travel) => {
                 const text = destinations[travel.location]
                 return <Destination text={text} key={travel.location} destination={travel.location} money={travel.money} currency={travel.currency} />
               })
-            })()}
+            }
         </div>
       </div>
     )
