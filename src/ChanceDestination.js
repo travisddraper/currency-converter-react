@@ -87,7 +87,7 @@ class ChanceDestinations extends React.Component {
     if(prevProps.baseValue !== this.props.baseValue || prevProps.baseCurrency !== this.props.baseCurrency){
       this.fetchBlurbs();
     }
-  }
+  } 
   
   render() {
     const {destinations} = this.state
