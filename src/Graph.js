@@ -1,14 +1,59 @@
 import React from 'react';
+import Chart from 'chart.js/auto';
+import { render } from '@testing-library/react';
 
-export default function Graph(props) {
+export default class Graph extends React.Component {
+    constructor(props) {
+        super(props);
+        this.chartRef = React.createRef();
+    }
+    
 
 
-    return (
-        <div id="graph" className="functionContainer"> 
-            <h1 className="title graphTitle"><span className="fontColorChoice">USD</span> to <span className="fontColorChoice">EUR</span> Graph</h1>
-            <div className="graph">
-                <div className="warning">Add some cash above, and let's check out that rate!</div>
+    buildChart() {
+        const {chartData, chartLabels, chartTitle } = this.props.chart
+
+        const chartRef = this.chartRef.current.getContext('2d');
+
+        if (typeof this.chart !== 'undefined') {
+            this.chart.destroy();
+        }
+
+        this.chart = new Chart(this.chartRef.current.getContext("2d"), {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: [
+                    {
+                        label: chartTitle,
+                        data: chartData,
+                        fill: false,
+                        tension: 0,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+            }
+        })
+    }
+    
+    componentDidMount() {
+        this.buildChart()
+    }
+    componentDidUpdate(prevProps, prevState) {
+        this.buildChart();
+    }
+
+    render() {  
+        const {base, convertTo} = this.props.titles;
+        return (
+            <div id="graph" className="functionContainer d-flex"> 
+                <h1 className="title graphTitle"><span className="fontColorChoice">{base}</span> to <span className="fontColorChoice">{convertTo}</span> Graph</h1>
+                <div className="graph">
+                    <canvas ref={this.chartRef} />
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }

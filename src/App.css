@@ -645,7 +645,9 @@ button:focus {
 
 
 /* --------------GRAPH.JS------------------------ */
-
+canvas {
+  margin-top: 100px;
+}
 
 /* ------------- CHANCEDESTINATION.JS ---------- */
 
