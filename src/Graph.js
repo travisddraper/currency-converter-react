@@ -34,6 +34,8 @@ export default class Graph extends React.Component {
             },
             options: {
                 responsive: true,
+                aspectRatio: 1,
+
             }
         })
     }
@@ -48,7 +50,7 @@ export default class Graph extends React.Component {
     render() {  
         const {base, convertTo} = this.props.titles;
         return (
-            <div id="graph" className="functionContainer d-flex"> 
+            <div id="graph" className="functionContainer"> 
                 <h1 className="title graphTitle"><span className="fontColorChoice">{base}</span> to <span className="fontColorChoice">{convertTo}</span> Graph</h1>
                 <div className="graph">
                     <canvas ref={this.chartRef} />
