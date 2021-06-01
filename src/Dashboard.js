@@ -76,7 +76,6 @@ class Dashboard extends React.Component {
 
       if(direction === 'base'){
         this.fetchLatest(currency);
-        this.fetchGraph(currency, this.state.selections.convertTo);
 
       } else {
         this.fetchGraph(this.state.selections.base, currency);
@@ -154,6 +153,7 @@ class Dashboard extends React.Component {
       .then(json)
       .then((data) => {
         this.currencyUpdate(data);
+        this.fetchGraph(currency, this.state.selections.convertTo)
         if(this.state.conversion.baseValue) {
           this.fetchBlurbs(); 
         }
@@ -215,7 +215,6 @@ class Dashboard extends React.Component {
 
   componentDidMount () {
     this.fetchLatest(this.state.selections.base);
-    this.fetchGraph(this.state.selections.base, this.state.selections.convertTo)
   }
 
   render() {
