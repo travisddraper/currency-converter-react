@@ -39,21 +39,20 @@ class Dashboard extends React.Component {
       this.throttleCurrencyChange= debounce(this.throttleCurrencyChange.bind(this), 1000)
   }
 
-  handleCurrencyChange(conversion, currency) {
+  handleCurrencyChange(direction, currency) {
       const newSelections = {
           ...this.state.selections,
-          [conversion]: currency,
+          [direction]: currency,
       }
       this.setState({ selections: newSelections })
+      if(direction === 'base'){
+        this.fetchLatest(currency);
+      }
   }
   
 
-  throttleCurrencyChange(direction, newConversion) {
-    if(direction === "base") {
-      this.setState({ conversion: newConversion })
-    } else {
-      this.setState({ conversion: newConversion })
-    }
+  throttleCurrencyChange(newConversion) {
+    this.setState({ conversion: newConversion })
   }
 
   currencyChange(event) {
@@ -64,7 +63,7 @@ class Dashboard extends React.Component {
         baseValue: event.target.value,
         convertToValue: convertValue,
       }
-      this.throttleCurrencyChange('base', newConversion)
+      this.throttleCurrencyChange(newConversion)
     } else {
       const convertValue = (event.target.value / (this.state.rates.goingRate === 0 ? 1 : this.state.rates.goingRate)).toFixed(2)
       document.getElementById('base').value = convertValue;
@@ -72,14 +71,13 @@ class Dashboard extends React.Component {
         baseValue: convertValue,
         convertToValue: event.target.value,
       }
-      this.throttleCurrencyChange('convertTo', newConversion)
+      this.throttleCurrencyChange(newConversion)
     }
   }
 
   currencyUpdate(data) {
       let goingRate = 0;
       let newRates = [];
-      const newSelections = {...this.state.selections, base: data.base }
       let base = document.getElementById('base')
       let conversion = document.getElementById('convertTo')
         
@@ -89,23 +87,20 @@ class Dashboard extends React.Component {
         }
         newRates.push( {[property]: data.rates[property]} )
       }
-    
       this.setState({ 
         rates: {
           goingRate: goingRate,
           currencyRates: newRates,
-        },
-        selections: newSelections,
+        }
       })
-        
       if(conversion.value) {
         conversion.value = (base.value * goingRate).toFixed(2)
       }
         
   }
 
-  componentDidMount () {
-      fetch("https://altexchangerateapi.herokuapp.com/latest?from=USD")
+  fetchLatest(currency) {
+    fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${currency}`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
@@ -115,21 +110,14 @@ class Dashboard extends React.Component {
         this.setState({ error: error.message });
         console.log(error);
       })
-
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.selections.base !== this.state.selections.base || prevState.selections.convertTo !== this.state.selections.convertTo) {
-      fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.state.selections.base}`)
-      .then(checkStatus)
-      .then(json)
-      .then((data) => {
-        this.currencyUpdate(data);
-      })
-    }
+  componentDidMount () {
+    this.fetchLatest(this.state.selections.base);
   }
 
   render() {
+    const currencyRates = this.state.rates.currencyRates;
 
     return (
       <>
@@ -149,7 +137,7 @@ class Dashboard extends React.Component {
                   <Graph />
                 }
                 destination={
-                  <ChanceDestination baseValue={this.state.conversion.baseValue} rates={this.state.rates.currencyRates} />
+                  <ChanceDestination baseValue={this.state.conversion.baseValue} rates={currencyRates} baseCurrency={this.state.selections.base} />
                 } 
             />
             }

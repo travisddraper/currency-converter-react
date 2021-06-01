@@ -84,14 +84,14 @@ class ChanceDestinations extends React.Component {
     this.fetchBlurbs();
   }
   componentDidUpdate(prevProps) {
-    if(prevProps.baseValue !== this.props.baseValue){
+    if(prevProps.baseValue !== this.props.baseValue || prevProps.baseCurrency !== this.props.baseCurrency){
       this.fetchBlurbs();
     }
   }
   
   render() {
     const {destinations} = this.state
-
+  
     return (
       <div id="destinations" className="functionContainer">
       <Title location="title destinationTitle" />
