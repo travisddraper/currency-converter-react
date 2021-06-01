@@ -369,7 +369,9 @@ button:focus {
   max-height: 80% !important;
   width: 50%;
   max-width: 50% !important;
-  transition: 300ms
+  transition: 300ms;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 
 .converterBox {
@@ -394,7 +396,6 @@ button:focus {
   font-size: 40px;
   font-weight: 500;
   color: rgb(85, 111, 66);
-  /*color: rgba(7, 119, 163, 1) !important;*/
 }
 @media(max-width: 1450px) {
   .title {
@@ -419,6 +420,12 @@ button:focus {
   top: -75px;
   background-color: white;
   border: 2px solid rgba(58, 90, 137, 1);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.layoutBox[expanded='true'] .functionContainer {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .layoutBox[expanded="false"] .title {
@@ -439,8 +446,14 @@ button:focus {
   border: none;
   color: black;
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -15px;
+  right: -15px;
+}
+
+.layoutBox[expanded="true"] .expander {
+  color: white;
+  top: 5px;
+  right: -20px;
 }
 
 @media(max-width: 1199px) {
@@ -646,8 +659,14 @@ button:focus {
 
 /* --------------GRAPH.JS------------------------ */
 canvas {
-  margin-top: 50px;
+  margin-top: 25px;
 }
+
+.layoutBox[expanded="true"] canvas {
+  margin-top: 0;
+  padding: 50px;
+}
+
 
 /* ------------- CHANCEDESTINATION.JS ---------- */
 
