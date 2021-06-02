@@ -659,12 +659,13 @@ button:focus {
 
 /* --------------GRAPH.JS------------------------ */
 canvas {
-  margin-top: 25px;
+  margin-top: 60px;
 }
 
 .layoutBox[expanded="true"] canvas {
   margin-top: 0;
-  padding: 50px;
+  padding: 10px;
+  padding-bottom: 30px;
 }
 
 

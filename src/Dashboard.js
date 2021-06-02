@@ -11,7 +11,6 @@ import Graph from './Graph.js'
 import Converter from './Converter.js'
 import {currencyTracker} from './utils.js'
 
-
 import _ from 'underscore';
 import {debounce} from 'underscore';
 
@@ -193,7 +192,6 @@ class Dashboard extends React.Component {
   }
 
   fetchGraph(base, convert) {
-
     const endDate = new Date().toISOString().split('T')[0];
     const startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
     fetch(`https://altexchangerateapi.herokuapp.com/${startDate}..${endDate}?from=${base}&to=${convert}`)
