@@ -18,7 +18,7 @@ const Destination = (props) => {
         <MDBIcon className="mb-3 pr-2 arrow" icon="angle-right" />
         Travel to <a className="travel" href={`https://en.wikipedia.org/wiki/${destination.replace(/ /, '_')}`} rel="noreferrer" target="_blank">{destination}</a> with {(parseInt(money)).toLocaleString()} <span className="travel">{currency}</span>!
       </p>
-      <div id={destination} className="travelBlurb">{text}</div>
+      <div id={destination} className="travelBlurb"><a className="travelTextLink" href={`https://en.wikipedia.org/wiki/${destination.replace(/ /, '_')}`} rel="noreferrer" target="_blank">{text}</a></div>
     </div>
     </div>
   )
@@ -27,7 +27,7 @@ const Destination = (props) => {
 function ChanceDestinations(props) {
   
   const {destinations, locations} = props;
-
+  console.log(destinations);
   return (
     <div id="destinations" className="functionContainer">
       <Title location="title destinationTitle" />

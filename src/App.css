@@ -658,8 +658,9 @@ button:focus {
 
 
 /* --------------GRAPH.JS------------------------ */
-canvas {
-  margin-top: 60px;
+.layoutBox[expanded='false'] canvas {
+  margin-top: 30px;
+  max-height: 100%;
 }
 
 .layoutBox[expanded="true"] canvas {
@@ -770,6 +771,10 @@ canvas {
   .travelHeader .arrow {
     display: none !important;
   }
+}
+
+.travelTextLink {
+  color: black !important;
 }
 
 /* ------------ FOOTER NAVIGATION -------- */

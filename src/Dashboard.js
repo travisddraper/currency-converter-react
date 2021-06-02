@@ -176,7 +176,7 @@ class Dashboard extends React.Component {
       .then((data) => {
         const wikiObject = data.query.pages
         for(const key in wikiObject) {
-          const textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ');
+          const textBlurb = wikiObject[key].extract.slice(0, Math.floor(wikiObject[key].extract.length/3.5)).replace(reg, ' ') + '...';
           destinations[locationName] = textBlurb
         }
         
