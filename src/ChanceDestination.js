@@ -1,8 +1,5 @@
 import React from 'react';
 import { MDBIcon } from "mdbreact";
-import {json, checkStatus } from './utils.js'
-import {currencyTracker} from './utils.js'
-import _ from 'underscore';
 
 
 const Title = () => <h1 className="title destinationTitle"><span className="textRemove">Chance</span> <span className="fontColorChoice px-1">Destinations</span></h1>
@@ -27,7 +24,7 @@ const Destination = (props) => {
 function ChanceDestinations(props) {
   
   const {destinations, locations} = props;
-  console.log(destinations);
+
   return (
     <div id="destinations" className="functionContainer">
       <Title location="title destinationTitle" />

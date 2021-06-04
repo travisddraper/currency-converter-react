@@ -1,6 +1,5 @@
 import React from 'react';
 import Chart from 'chart.js/auto';
-import { render } from '@testing-library/react';
 
 export default class Graph extends React.Component {
     constructor(props) {
